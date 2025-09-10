@@ -10,7 +10,7 @@ namespace LibaryManagment.Controllers;
 public class LoginController : Controller
 {
     // GET
-    public IActionResult Index()
+    public IActionResult Login()
     {
         return View();
     }
@@ -38,7 +38,7 @@ public class LoginController : Controller
         if (up.Count() == 1)
         {
             TempData["message"] = "Login Success";
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "Home");
         }
         else
         {
