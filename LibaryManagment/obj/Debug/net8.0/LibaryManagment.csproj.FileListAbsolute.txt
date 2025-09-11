@@ -29,3 +29,8 @@
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.pdb
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.genruntimeconfig.cache
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/MySqlConnector.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.AssemblyReference.cache
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryMa.90ABD5F4.Up2Date
