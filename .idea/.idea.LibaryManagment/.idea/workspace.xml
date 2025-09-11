@@ -9,13 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c51ab40-a04c-4e55-97e7-ec2f0ecd5728" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Edit.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/dataSources/ef65f7c1-2bc4-474c-bbd2-b3de12b846bd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/dataSources/ef65f7c1-2bc4-474c-bbd2-b3de12b846bd.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/LibrarianController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Models/LibrarianModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Librarian/Create.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Librarian/Edit.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Librarian/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Home/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Shared/_Layout.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
@@ -50,10 +50,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/BookController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LibrarianController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/StudentController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BookModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/LibrarianModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/StudentModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Book/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -62,6 +64,9 @@
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Librarian/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Librarian/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Librarian/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Login/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Student/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Student/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -146,7 +151,7 @@
       <workItem from="1757506957421" duration="6942000" />
       <workItem from="1757519593050" duration="2058000" />
       <workItem from="1757524104470" duration="3346000" />
-      <workItem from="1757569218917" duration="3698000" />
+      <workItem from="1757569218917" duration="5171000" />
     </task>
     <servers />
   </component>
