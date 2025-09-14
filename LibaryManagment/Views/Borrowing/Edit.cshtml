@@ -7,12 +7,16 @@
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="BorrowingId" />
     <div class="mb-3">
-        <label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />
+        <label for="StudentName">StudentName</label>
+        <select asp-for="StudentName" class="form-control" asp-items="@(new SelectList(ViewBag.Students, Model.StudentName))">
+            <option value="">-- Select Student --</option>
+        </select>
     </div>
     <div class="mb-3">
-        <label>BookName</label>
-        <input asp-for="BookName" class="form-control" />
+        <label for="BookName">BookName</label>
+        <select asp-for="BookName" class="form-control" asp-items="@(new SelectList(ViewBag.Books, Model.BookName))">
+            <option value="">-- Select Book --</option>
+        </select>
     </div>
     <div class="mb-3">
         <label>BorrowDate</label>
