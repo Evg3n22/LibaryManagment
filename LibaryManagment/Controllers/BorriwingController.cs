@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using LibaryManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagement.Controllers
 {
@@ -35,6 +36,7 @@ namespace LibraryManagement.Controllers
             return View(list);
         }
 
+        [Authorize(Roles = "admin,lib")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -87,6 +89,7 @@ namespace LibraryManagement.Controllers
             return RedirectToAction("Index");
         }
         
+        [Authorize(Roles = "admin,lib")]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -145,7 +148,7 @@ namespace LibraryManagement.Controllers
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
             var cmd = new MySqlCommand(
                 "UPDATE Borrowings SET StudentName=@studentname, BookName=@bookname, BorrowDate=@borrowdate, ReturnedDate=@returneddate WHERE BorrowingId=@id", 
-                con); // ✅ зміна
+                con);
             cmd.Parameters.AddWithValue("@studentname", model.StudentName);
             cmd.Parameters.AddWithValue("@bookname", model.BookName);
             cmd.Parameters.AddWithValue("@borrowdate", model.BorrowDate);
@@ -156,10 +159,11 @@ namespace LibraryManagement.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "admin,lib")]
         public IActionResult Delete(int id)
         {
-            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); // ✅ зміна
-            var cmd = new MySqlCommand("DELETE FROM Borrowings WHERE BorrowingId=@id", con); // ✅ зміна
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
+            var cmd = new MySqlCommand("DELETE FROM Borrowings WHERE BorrowingId=@id", con); 
             cmd.Parameters.AddWithValue("@id", id);
             con.Open();
             cmd.ExecuteNonQuery();

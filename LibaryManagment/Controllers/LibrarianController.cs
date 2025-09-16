@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using LibaryManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace LibaryManagment.Controllers;
@@ -34,7 +35,8 @@ public class LibrarianController : Controller
             }
             return View(librarians);
         }
-
+        
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -55,7 +57,8 @@ public class LibrarianController : Controller
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-
+        
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(int id)
         {
             LibrarianModel librarian = new();
@@ -90,7 +93,8 @@ public class LibrarianController : Controller
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-
+        
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 

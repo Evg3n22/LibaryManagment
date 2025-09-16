@@ -3,6 +3,7 @@ using MySqlConnector;
 using System.Data;
 using LibaryManagment.Models;
 namespace LibaryManagment.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 public class BookController : Controller
 {
@@ -31,12 +32,13 @@ public class BookController : Controller
         }
         return View(books);
     }
-
+    
+    [Authorize(Roles = "admin,lib")]
     public IActionResult Create()
     {
         return View();
     }
-
+    
     [HttpPost]
     public IActionResult Create(BookModel model)
     {
@@ -48,7 +50,8 @@ public class BookController : Controller
         cmd.ExecuteNonQuery();
         return RedirectToAction("Index");
     }
-
+    
+    [Authorize(Roles = "admin,lib")]
     public IActionResult Edit(int id)
     {
         BookModel book = new();
@@ -65,7 +68,7 @@ public class BookController : Controller
         }
         return View(book);
     }
-
+    
     [HttpPost]
     public IActionResult Edit(BookModel model)
     {
@@ -78,7 +81,8 @@ public class BookController : Controller
         cmd.ExecuteNonQuery();
         return RedirectToAction("Index");
     }
-
+    
+    [Authorize(Roles = "admin,lib")]
     public IActionResult Delete(int id)
     {
         using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 

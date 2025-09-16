@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using LibaryManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagement.Controllers
 {
@@ -32,12 +33,13 @@ namespace LibraryManagement.Controllers
             }
             return View(students);
         }
-
+        
+        [Authorize(Roles = "admin,lib")]
         public IActionResult Create()
         {
             return View();
         }
-
+        
         [HttpPost]
         public IActionResult Create(StudentModel model)
         {
@@ -52,7 +54,8 @@ namespace LibraryManagement.Controllers
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-
+        
+        [Authorize(Roles = "admin,lib")]
         public IActionResult Edit(int id)
         {
             StudentModel student = new();
@@ -86,7 +89,8 @@ namespace LibraryManagement.Controllers
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-
+        
+        [Authorize(Roles = "admin,lib")]
         public IActionResult Delete(int id)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));

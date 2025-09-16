@@ -9,11 +9,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c51ab40-a04c-4e55-97e7-ec2f0ecd5728" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" afterDir="false" />
@@ -150,7 +150,8 @@
       <workItem from="1757589159663" duration="430000" />
       <workItem from="1757768817967" duration="171000" />
       <workItem from="1757782307121" duration="1149000" />
-      <workItem from="1757835921562" duration="1160000" />
+      <workItem from="1757835921562" duration="1749000" />
+      <workItem from="1758025186186" duration="1282000" />
     </task>
     <servers />
   </component>
