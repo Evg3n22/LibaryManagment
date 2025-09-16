@@ -46,10 +46,12 @@ namespace LibraryManagement.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-            var cmd = new MySqlCommand("INSERT INTO Students (StudentName, Email, Phone) VALUES (@Name, @Email, @Phone)", con);
+            var cmd = new MySqlCommand("INSERT INTO Students (StudentName, Email, Phone, Password, Role) VALUES (@Name, @Email, @Phone, @Password, @Role)", con);
             cmd.Parameters.AddWithValue("@Name", model.StudentName);
             cmd.Parameters.AddWithValue("@Email", model.Email);
             cmd.Parameters.AddWithValue("@Phone", model.Phone);
+            cmd.Parameters.AddWithValue("@Password", model.Password);
+            cmd.Parameters.AddWithValue("@Role", "user");
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
@@ -80,11 +82,12 @@ namespace LibraryManagement.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-            var cmd = new MySqlCommand("UPDATE Students SET StudentName=@Name, Email=@Email, Phone=@Phone WHERE StudentId=@id", con);
+            var cmd = new MySqlCommand("UPDATE Students SET StudentName=@Name, Email=@Email, Phone=@Phone, Password=@Password WHERE StudentId=@id", con);
             cmd.Parameters.AddWithValue("@Name", model.StudentName);
             cmd.Parameters.AddWithValue("@Email", model.Email);
             cmd.Parameters.AddWithValue("@Phone", model.Phone);
             cmd.Parameters.AddWithValue("@id", model.StudentId);
+            cmd.Parameters.AddWithValue("@Password", model.Password);
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");

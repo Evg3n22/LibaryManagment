@@ -46,17 +46,28 @@ public class LibrarianController : Controller
         public IActionResult Create(LibrarianModel model)
         {
             if (!ModelState.IsValid)
+            {
+                var errors = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                ViewBag.Errors = errors;
                 return View(model);
+            }
+
 
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
-            var cmd = new MySqlCommand("INSERT INTO Librarians (Name, Age, Phone) VALUES (@Name, @Age, @Phone)", con);
+            var cmd = new MySqlCommand(
+                "INSERT INTO Librarians (Name, Age, Phone, Password, Role) VALUES (@Name, @Age, @Phone, @Password, @Role)", con);
             cmd.Parameters.AddWithValue("@Name", model.Name);
             cmd.Parameters.AddWithValue("@Age", model.Age);
             cmd.Parameters.AddWithValue("@Phone", model.Phone);
+            cmd.Parameters.AddWithValue("@Password", model.Password);
+            cmd.Parameters.AddWithValue("@Role", model.Role); 
             con.Open();
             cmd.ExecuteNonQuery();
+
             return RedirectToAction("Index");
         }
+
+
         
         [Authorize(Roles = "admin")]
         public IActionResult Edit(int id)
@@ -84,11 +95,12 @@ public class LibrarianController : Controller
                 return View(model);
 
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-            var cmd = new MySqlCommand("UPDATE Librarians SET Name=@Name, Age=@Age, Phone=@Phone WHERE LibrarianId=@id", con); // ✅ зміна
+            var cmd = new MySqlCommand("UPDATE Librarians SET Name=@Name, Age=@Age, Phone=@Phone, Password=@Password WHERE LibrarianId=@id", con); 
             cmd.Parameters.AddWithValue("@Name", model.Name);
             cmd.Parameters.AddWithValue("@Age", model.Age);
             cmd.Parameters.AddWithValue("@Phone", model.Phone);
             cmd.Parameters.AddWithValue("@id", model.LibrarianId);
+            cmd.Parameters.AddWithValue("@Password", model.Password);
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 namespace LibaryManagment.Models;
 
 public class StudentModel
@@ -7,5 +9,5 @@ public class StudentModel
     public string Email { get; set; }
     public string Phone { get; set; }
     public string Password { get; set; }
-    public string Role { get; set; }
+    [BindNever] public string Role { get; set; } = "user";
 }
