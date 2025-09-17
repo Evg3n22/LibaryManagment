@@ -14,14 +14,33 @@ namespace LibraryManagement.Controllers
         {
             _config = config;
         }
-
+        
         public IActionResult Index()
         {
             List<BorrowingModel> list = new();
-            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
-            var cmd = new MySqlCommand("SELECT * FROM Borrowings", con); 
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
             con.Open();
-            var reader = cmd.ExecuteReader();
+
+            MySqlCommand cmd;
+
+            if (User.IsInRole("admin") || User.IsInRole("lib"))
+            {
+                // Адмін і бібліотекар бачать все
+                cmd = new MySqlCommand("SELECT * FROM Borrowings", con);
+            }
+            else if (User.IsInRole("user"))
+            {
+                // Студент бачить тільки свої записи
+                cmd = new MySqlCommand("SELECT * FROM Borrowings WHERE StudentName = @studentName", con);
+                cmd.Parameters.AddWithValue("@studentName", User.Identity.Name); 
+            }
+            else
+            {
+                // Якщо роль невідома - нічого не показуємо
+                return Forbid();
+            }
+
+            using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 list.Add(new BorrowingModel
@@ -35,6 +54,28 @@ namespace LibraryManagement.Controllers
             }
             return View(list);
         }
+
+        
+        // public IActionResult Index()
+        // {
+        //     List<BorrowingModel> list = new();
+        //     using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
+        //     var cmd = new MySqlCommand("SELECT * FROM Borrowings", con); 
+        //     con.Open();
+        //     var reader = cmd.ExecuteReader();
+        //     while (reader.Read())
+        //     {
+        //         list.Add(new BorrowingModel
+        //         {
+        //             BorrowingId = Convert.ToInt32(reader["BorrowingId"]),
+        //             StudentName = reader["StudentName"].ToString(),
+        //             BookName = reader["BookName"].ToString(),
+        //             BorrowDate = Convert.ToDateTime(reader["BorrowDate"]),
+        //             ReturnedDate = Convert.ToDateTime(reader["ReturnedDate"])
+        //         });
+        //     }
+        //     return View(list);
+        // }
 
         [Authorize(Roles = "admin,lib")]
         [HttpGet]

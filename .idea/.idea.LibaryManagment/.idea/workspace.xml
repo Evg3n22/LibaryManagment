@@ -11,9 +11,6 @@
     <list default="true" id="0c51ab40-a04c-4e55-97e7-ec2f0ecd5728" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" afterDir="false" />
@@ -23,6 +20,7 @@
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +46,7 @@
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LibrarianController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/StudentController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Data/AppDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BookModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/LibrarianModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -152,6 +151,8 @@
       <workItem from="1757782307121" duration="1149000" />
       <workItem from="1757835921562" duration="1749000" />
       <workItem from="1758025186186" duration="1282000" />
+      <workItem from="1758026474297" duration="7764000" />
+      <workItem from="1758112395173" duration="317000" />
     </task>
     <servers />
   </component>
