@@ -10,7 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0c51ab40-a04c-4e55-97e7-ec2f0ecd5728" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Book/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Book/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Librarian/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Librarian/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Login/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Login/Login.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Student/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Student/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" afterDir="false" />
@@ -20,7 +25,7 @@
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/wwwroot/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/wwwroot/css/login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +157,7 @@
       <workItem from="1757835921562" duration="1749000" />
       <workItem from="1758025186186" duration="1282000" />
       <workItem from="1758026474297" duration="7764000" />
-      <workItem from="1758112395173" duration="317000" />
+      <workItem from="1758112395173" duration="2096000" />
     </task>
     <servers />
   </component>

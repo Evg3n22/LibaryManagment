@@ -13,6 +13,7 @@
         <th>StudentName</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -23,10 +24,14 @@
             <td>@item.StudentName</td>
             <td>@item.Email</td>
             <td>@item.Phone</td>
-            <td>
-                <a class="btn btn-warning btn-sm" href="/Student/Edit/@item.StudentId">Edit</a>
-                <a class="btn btn-danger btn-sm" href="/Student/Delete/@item.StudentId" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
+            @if (User.IsInRole("admin") || User.IsInRole("lib"))
+            {
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Student/Edit/@item.StudentId">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Student/Delete/@item.StudentId" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            }
+            
         </tr>
     }
     </tbody>
