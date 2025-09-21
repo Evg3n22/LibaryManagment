@@ -59,3 +59,4 @@
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gda8j3vvS8U=",
+  "dgSpecHash": "R1abRWTf/WI=",
   "success": true,
   "projectFilePath": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/LibaryManagment.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "/Users/evgen/.nuget/packages/mysql.data/9.1.0/mysql.data.9.1.0.nupkg.sha512",
     "/Users/evgen/.nuget/packages/mysql.entityframeworkcore/8.0.8/mysql.entityframeworkcore.8.0.8.nupkg.sha512",
     "/Users/evgen/.nuget/packages/mysqlconnector/2.4.0/mysqlconnector.2.4.0.nupkg.sha512",
+    "/Users/evgen/.nuget/packages/pomelo.entityframeworkcore.mysql/8.0.1/pomelo.entityframeworkcore.mysql.8.0.1.nupkg.sha512",
     "/Users/evgen/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/Users/evgen/.nuget/packages/system.configuration.configurationmanager/8.0.0/system.configuration.configurationmanager.8.0.0.nupkg.sha512",
     "/Users/evgen/.nuget/packages/system.diagnostics.diagnosticsource/8.0.1/system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",

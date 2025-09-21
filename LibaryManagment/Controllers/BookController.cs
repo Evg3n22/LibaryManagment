@@ -27,7 +27,8 @@ public class BookController : Controller
             {
                 BookId = Convert.ToInt32(reader["BookId"]), 
                 BookName = reader["BookName"].ToString(),
-                Author = reader["Author"].ToString()
+                Author = reader["Author"].ToString(),
+                Available = Convert.ToBoolean(reader["Available"])
             });
         }
         return View(books);
@@ -43,13 +44,27 @@ public class BookController : Controller
     public IActionResult Create(BookModel model)
     {
         using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
-        var cmd = new MySqlCommand("INSERT INTO Books (BookName, Author) VALUES (@BookName, @Author)", con); 
+        var cmd = new MySqlCommand(
+            "INSERT INTO Books (BookName, Author, Available) VALUES (@BookName, @Author, 1)", con); 
         cmd.Parameters.AddWithValue("@BookName", model.BookName);
         cmd.Parameters.AddWithValue("@Author", model.Author);
         con.Open();
         cmd.ExecuteNonQuery();
         return RedirectToAction("Index");
     }
+
+    
+    /*[HttpPost]
+    public IActionResult Create(BookModel model)
+    {
+        using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
+        var cmd = new MySqlCommand("INSERT INTO Books (BookName, Author) VALUES (@BookName, @Author)", con); 
+        cmd.Parameters.AddWithValue("@BookName", model.BookName);
+        cmd.Parameters.AddWithValue("@Author", model.Author);
+        con.Open();
+        cmd.ExecuteNonQuery();
+        return RedirectToAction("Index");
+    }*/
     
     [Authorize(Roles = "admin,lib")]
     public IActionResult Edit(int id)

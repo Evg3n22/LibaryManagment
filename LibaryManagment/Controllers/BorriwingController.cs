@@ -55,28 +55,6 @@ namespace LibraryManagement.Controllers
             return View(list);
         }
 
-        
-        // public IActionResult Index()
-        // {
-        //     List<BorrowingModel> list = new();
-        //     using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
-        //     var cmd = new MySqlCommand("SELECT * FROM Borrowings", con); 
-        //     con.Open();
-        //     var reader = cmd.ExecuteReader();
-        //     while (reader.Read())
-        //     {
-        //         list.Add(new BorrowingModel
-        //         {
-        //             BorrowingId = Convert.ToInt32(reader["BorrowingId"]),
-        //             StudentName = reader["StudentName"].ToString(),
-        //             BookName = reader["BookName"].ToString(),
-        //             BorrowDate = Convert.ToDateTime(reader["BorrowDate"]),
-        //             ReturnedDate = Convert.ToDateTime(reader["ReturnedDate"])
-        //         });
-        //     }
-        //     return View(list);
-        // }
-
         [Authorize(Roles = "admin,lib")]
         [HttpGet]
         public IActionResult Create()
@@ -98,7 +76,7 @@ namespace LibraryManagement.Controllers
             }
 
             // Отримати книги
-            var bookCmd = new MySqlCommand("SELECT BookName FROM Books", con);
+            var bookCmd = new MySqlCommand("SELECT BookName FROM Books WHERE Available = 1", con);
             using (var reader = bookCmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -113,8 +91,33 @@ namespace LibraryManagement.Controllers
             return View();
         }
 
-
+        
         [HttpPost]
+        public IActionResult Create(BorrowingModel model)
+        {
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
+
+            // Додаємо Borrowing
+            var cmd = new MySqlCommand(
+                "INSERT INTO Borrowings (StudentName, BookName, BorrowDate, ReturnedDate) VALUES (@studentname, @bookname, @borrowdate, @returneddate)",
+                con);
+            cmd.Parameters.AddWithValue("@studentname", model.StudentName);
+            cmd.Parameters.AddWithValue("@bookname", model.BookName);
+            cmd.Parameters.AddWithValue("@borrowdate", model.BorrowDate);
+            cmd.Parameters.AddWithValue("@returneddate", model.ReturnedDate);
+            cmd.ExecuteNonQuery();
+
+            // Ставимо Available = 0 (книга зайнята)
+            var updateBook = new MySqlCommand("UPDATE Books SET Available = 0 WHERE BookName = @bookname", con);
+            updateBook.Parameters.AddWithValue("@bookname", model.BookName);
+            updateBook.ExecuteNonQuery();
+
+            return RedirectToAction("Index");
+        }
+
+        
+        /*[HttpPost]
         public IActionResult Create(BorrowingModel model)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
@@ -128,7 +131,7 @@ namespace LibraryManagement.Controllers
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
-        }
+        }*/
         
         [Authorize(Roles = "admin,lib")]
         [HttpGet]
@@ -182,8 +185,36 @@ namespace LibraryManagement.Controllers
             return View(model);
         }
 
-
+        
         [HttpPost]
+        public IActionResult Edit(BorrowingModel model)
+        {
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
+
+            var cmd = new MySqlCommand(
+                "UPDATE Borrowings SET StudentName=@studentname, BookName=@bookname, BorrowDate=@borrowdate, ReturnedDate=@returneddate WHERE BorrowingId=@id",
+                con);
+            cmd.Parameters.AddWithValue("@studentname", model.StudentName);
+            cmd.Parameters.AddWithValue("@bookname", model.BookName);
+            cmd.Parameters.AddWithValue("@borrowdate", model.BorrowDate);
+            cmd.Parameters.AddWithValue("@returneddate", model.ReturnedDate);
+            cmd.Parameters.AddWithValue("@id", model.BorrowingId);
+            cmd.ExecuteNonQuery();
+
+            // Якщо книга повернута — ставимо Available = 1
+            if (model.ReturnedDate != null)
+            {
+                var updateBook = new MySqlCommand("UPDATE Books SET Available = 1 WHERE BookName = @bookname", con);
+                updateBook.Parameters.AddWithValue("@bookname", model.BookName);
+                updateBook.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        
+        /*[HttpPost]
         public IActionResult Edit(BorrowingModel model)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
@@ -198,10 +229,45 @@ namespace LibraryManagement.Controllers
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
-        }
+        }*/
 
         [Authorize(Roles = "admin,lib")]
         public IActionResult Delete(int id)
+        {
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
+            con.Open();
+
+            // Спочатку дізнаємось, яка книга була у цьому Borrowing
+            string bookName = "";
+            var getBookCmd = new MySqlCommand("SELECT BookName FROM Borrowings WHERE BorrowingId=@id", con);
+            getBookCmd.Parameters.AddWithValue("@id", id);
+            using (var reader = getBookCmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    bookName = reader["BookName"].ToString();
+                }
+            }
+
+            // Видаляємо Borrowing
+            var cmd = new MySqlCommand("DELETE FROM Borrowings WHERE BorrowingId=@id", con); 
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+
+            // Робимо книгу доступною
+            if (!string.IsNullOrEmpty(bookName))
+            {
+                var updateBook = new MySqlCommand("UPDATE Books SET Available = 1 WHERE BookName=@bookname", con);
+                updateBook.Parameters.AddWithValue("@bookname", bookName);
+                updateBook.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        
+        /*[Authorize(Roles = "admin,lib")]
+         public IActionResult Delete(int id)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")); 
             var cmd = new MySqlCommand("DELETE FROM Borrowings WHERE BorrowingId=@id", con); 
@@ -209,6 +275,6 @@ namespace LibraryManagement.Controllers
             con.Open();
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }
