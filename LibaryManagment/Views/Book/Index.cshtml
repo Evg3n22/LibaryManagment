@@ -1,4 +1,4 @@
-@model List<LibaryManagment.Models.BookModel>
+@*@model List<LibaryManagment.Models.BookModel>
 
 @{
     ViewData["Title"] = "Books";
@@ -35,6 +35,69 @@
                 </td>
             }
             
+        </tr>
+    }
+    </tbody>
+</table>*@
+@model List<LibaryManagment.Models.BookModel>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+@if (User.IsInRole("admin") || User.IsInRole("lib"))
+{
+    <a class="btn btn-primary mt-3 ms-2" href="/Book/Create">Add New Book</a>
+}
+
+<table class="table table-bordered mt-3">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Copies Available</th>
+        <th>Copies Total</th>
+        <th>Year</th>
+        <th>Publisher</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookId</td>
+            <td>@item.BookName</td>
+            <td>@item.AuthorName</td>
+            <td>@item.CopiesAvailable</td>
+            <td>@item.CopiesTotal</td>
+            <td>@item.Year</td>
+            <td>@item.Publisher</td>
+            <td>@item.CategoryID</td>
+            <td>@item.BookDescription</td>
+            <td>
+                @if (item.BookImage != null && item.BookImage.Length > 0)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(item.BookImage)" 
+                         alt="Book Image" style="max-width: 80px; max-height: 100px;" />
+                }
+                else
+                {
+                    <span>No image</span>
+                }
+            </td>
+            @if (User.IsInRole("admin") || User.IsInRole("lib"))
+            {
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Book/Edit/@item.BookId">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Book/Delete/@item.BookId"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            }
         </tr>
     }
     </tbody>

@@ -1,4 +1,4 @@
-@model LibaryManagment.Models.BookModel;
+@*@model LibaryManagment.Models.BookModel;
 
 
 @{
@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
         <label>Author</label>
-        <input asp-for="Author" class="form-control" />
+        <input asp-for="AuthorName" class="form-control" />
     </div>
     <button type="submit" class="btn btn-success">Add</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
@@ -31,4 +31,66 @@
 
         return true; //aloww submission
     }
-</script>
+</script>*@
+@model LibaryManagment.Models.BookModel
+
+@{
+    ViewData["Title"] = "Create Book";
+}
+
+<h2>Create New Book</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Book Name</label>
+        <input asp-for="BookName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Author</label>
+        <input asp-for="AuthorName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Author ID</label>
+        <input asp-for="AuthorID" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Copies Available</label>
+        <input asp-for="CopiesAvailable" class="form-control" type="number" />
+    </div>
+
+    <div class="mb-3">
+        <label>Copies Total</label>
+        <input asp-for="CopiesTotal" class="form-control" type="number" />
+    </div>
+
+    <div class="mb-3">
+        <label>Year</label>
+        <input asp-for="Year" class="form-control" type="number" />
+    </div>
+
+    <div class="mb-3">
+        <label>Publisher</label>
+        <input asp-for="Publisher" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="BookDescription" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Category ID</label>
+        <input asp-for="CategoryID" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Book Image</label>
+        <input type="file" name="BookImage" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
