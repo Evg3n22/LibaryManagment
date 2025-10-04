@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pJitAtJgMkZMCc/9SgYZDtlsRi/C6illbgfMEr1DxnQ=",
+  "Hash": "O0xHnUV24GlTMaWSmz2E8B87hwWk+lXIXR5V/79uhSs=",
   "Source": "LibaryManagment",
   "BasePath": "_content/LibaryManagment",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/scopedcss/projectbundle/LibaryManagment.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/BookIndex.css",
+      "SourceId": "LibaryManagment",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/",
+      "BasePath": "_content/LibaryManagment",
+      "RelativePath": "css/BookIndex.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/BookIndex.css"
     },
     {
       "Identity": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/login.css",

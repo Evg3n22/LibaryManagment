@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/LibaryManagment.bundle.scp.css"
     },
     {
+      "Id": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/BookIndex.css",
+      "PackagePath": "staticwebassets/css/BookIndex.css"
+    },
+    {
       "Id": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/login.css",
       "PackagePath": "staticwebassets/css/login.css"
     },
