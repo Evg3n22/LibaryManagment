@@ -30,6 +30,13 @@
                             </li>
                         }
                         
+                        @if (User.IsInRole("admin") || User.IsInRole("lib"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/Author/Index">Author</a>
+                            </li>
+                        }
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Book/Index">Book</a>
                         </li>

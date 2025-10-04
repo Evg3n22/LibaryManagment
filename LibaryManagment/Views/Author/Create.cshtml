@@ -1,0 +1,41 @@
+@model LibaryManagment.Models.AuthorModel
+
+@{
+    ViewData["Title"] = "Create Author";
+}
+
+<div class="container mt-4">
+    <h2>Create New Author</h2>
+    
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="AuthorName" class="form-label">Author Name</label>
+            <input asp-for="AuthorName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="BirthYear" class="form-label">Birth Year</label>
+            <input asp-for="BirthYear" class="form-control" type="number" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Country" class="form-label">Country</label>
+            <input asp-for="Country" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AuthorDescription" class="form-label">Description</label>
+            <textarea asp-for="AuthorDescription" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageFile" class="form-label">Author Image</label>
+            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" />
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

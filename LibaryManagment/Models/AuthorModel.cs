@@ -7,4 +7,6 @@ public class AuthorModel
     public int BirthYear { get; set; }
     public string Country { get; set; }
     public string AuthorDescription { get; set; }
+    public IFormFile? ImageFile { get; set; }
+    public byte[] AuthorImage { get; set; }
 }

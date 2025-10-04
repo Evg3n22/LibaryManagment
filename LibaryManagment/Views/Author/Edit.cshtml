@@ -1,0 +1,61 @@
+@model LibaryManagment.Models.AuthorModel
+
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<div class="container mt-4">
+    <h2>Edit Author</h2>
+    
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input asp-for="AuthorID" type="hidden" />
+
+        <div class="mb-3">
+            <label asp-for="AuthorName" class="form-label">Author Name</label>
+            <input asp-for="AuthorName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="BirthYear" class="form-label">Birth Year</label>
+            <input asp-for="BirthYear" class="form-control" type="number" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Country" class="form-label">Country</label>
+            <input asp-for="Country" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AuthorDescription" class="form-label">Description</label>
+            <textarea asp-for="AuthorDescription" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            @if (Model.AuthorImage != null && Model.AuthorImage.Length > 0)
+            {
+                <div>
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.AuthorImage)" 
+                         alt="@Model.AuthorName" 
+                         style="max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 5px;" />
+                </div>
+            }
+            else
+            {
+                <p>No image uploaded</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageFile" class="form-label">Change Image (optional)</label>
+            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" />
+            <small class="form-text text-muted">Leave empty to keep the current image</small>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Update</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+

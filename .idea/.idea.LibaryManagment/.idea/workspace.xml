@@ -9,29 +9,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c51ab40-a04c-4e55-97e7-ec2f0ecd5728" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Models/AuthorModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Models/QueueModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Queue.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/AuthorController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Data/ApplicationDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Author/Create.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Author/Edit.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LibaryManagment/Views/Author/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LibaryManagment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/BookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BookController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Models/BookModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Models/BookModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Book/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Book/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Book/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Book/Edit.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Data/DbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/LibaryManagment.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/LibaryManagment.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Models/AuthorModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Models/AuthorModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/bin/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/LibaryManagment.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/ref/LibaryManagment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/Debug/net8.0/refint/LibaryManagment.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/LibaryManagment.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/LibaryManagment.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/LibaryManagment.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/LibaryManagment.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/LibaryManagment/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,11 +61,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/AuthorController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/BookController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/BorriwingController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LibrarianController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/LoginController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Controllers/StudentController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/AuthorModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BookModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/BorrowingModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -64,10 +75,12 @@
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/LoginModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/QueueModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Models/StudentModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Author/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Author/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Author/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Book/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Book/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Book/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Book/Queue.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LibaryManagment/Views/Borrowing/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -170,6 +183,7 @@
       <workItem from="1758468664359" duration="3533000" />
       <workItem from="1758798903390" duration="3289000" />
       <workItem from="1759480994925" duration="11302000" />
+      <workItem from="1759569886733" duration="4769000" />
     </task>
     <servers />
   </component>
