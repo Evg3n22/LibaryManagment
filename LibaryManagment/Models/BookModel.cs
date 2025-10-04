@@ -12,6 +12,8 @@ public class BookModel
     public string Publisher { get; set; }
     public string BookDescription { get; set; }
     public int CategoryID { get; set; }
+    
+    public IFormFile? ImageFile { get; set; }
     public byte[] BookImage { get; set; }
     /*public bool Available { get; set; }*/
 }

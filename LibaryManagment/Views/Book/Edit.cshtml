@@ -35,12 +35,9 @@
 
     <div class="mb-3">
         <label>Author</label>
-        <input asp-for="AuthorName" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label>Author ID</label>
-        <input asp-for="AuthorID" class="form-control" />
+        <select asp-for="AuthorID" class="form-control" asp-items="@(new SelectList(ViewBag.Authors, "AuthorID", "AuthorName", Model.AuthorID))">
+            <option value="">-- Select Author --</option>
+        </select>
     </div>
 
     <div class="mb-3">
@@ -75,13 +72,23 @@
 
     <div class="mb-3">
         <label>Book Image</label><br />
-        @if (Model.BookImage != null && Model.BookImage.Length > 0)
+        @*@if (Model.BookImage != null && Model.BookImage.Length > 0)
         {
             <img src="data:image/png;base64,@Convert.ToBase64String(Model.BookImage)" 
                  alt="Book Image" style="max-width: 150px; max-height: 200px;" />
             <br />
         }
-        <input type="file" name="BookImage" class="form-control" />
+        <input type="file" name="BookImage" class="form-control" />*@
+        @*<form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+        </form>*@
+        <label>Book Image</label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>

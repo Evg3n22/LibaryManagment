@@ -6,6 +6,6 @@ public class BorrowingModel
     public string StudentName { get; set; }
     public string BookName { get; set; }
     public DateTime BorrowDate { get; set; }
-    public DateTime ReturnedDate { get; set; }
+    public DateTime? ReturnedDate { get; set; }
     
 }

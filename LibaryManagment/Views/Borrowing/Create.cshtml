@@ -1,4 +1,4 @@
-@model LibaryManagment.Models.BorrowingModel
+@*@model LibaryManagment.Models.BorrowingModel
 @{
     ViewData["Title"] = "Add Borrowing";
 }
@@ -6,8 +6,8 @@
 
 <form asp-action="Create" method="post" onsubmit="return validateForm();">
     <div class="mb-3">
-        @*<label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />*@
+        $1$<label>StudentName</label>
+        <input asp-for="StudentName" class="form-control" />#1#
         
             <label for="StudentName">StudentName</label>
             <select asp-for="StudentName" class="form-control" asp-items="@(new SelectList(ViewBag.Students))">
@@ -47,4 +47,119 @@
 
         return true; // allow submission
     }
-</script>
+</script>*@
+
+@model LibaryManagment.Models.BorrowingModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Видати книгу</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .unavailable {
+            color: #dc3545;
+            font-style: italic;
+        }
+        .book-option {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="bi bi-book"></i> Видати книгу студенту</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Create" method="post">
+                            <div class="mb-4">
+                                <label for="StudentName" class="form-label fw-bold">
+                                    <i class="bi bi-person"></i> Студент
+                                </label>
+                                <select asp-for="StudentName" class="form-select form-select-lg" required>
+                                    <option value="">-- Оберіть студента --</option>
+                                    @foreach (var student in ViewBag.Students)
+                                    {
+                                        <option value="@student">@student</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="BookName" class="form-label fw-bold">
+                                    <i class="bi bi-journal-bookmark"></i> Книга
+                                </label>
+                                <select asp-for="BookName" class="form-select form-select-lg" id="bookSelect" required>
+                                    <option value="">-- Оберіть книгу --</option>
+                                    @foreach (var book in ViewBag.Books)
+                                    {
+                                        int available = ViewBag.BookAvailability[book];
+                                        if (available > 0)
+                                        {
+                                            <option value="@book" class="book-option">
+                                                @book 
+                                                <span class="available">(✓ Доступно: @available копій)</span>
+                                            </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@book" class="book-option">
+                                                @book 
+                                                <span class="unavailable">(⏳ Немає в наявності - буде додано в чергу)</span>
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                                <div id="bookInfo" class="mt-2"></div>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle"></i> 
+                                <strong>Примітка:</strong> Якщо книги немає в наявності, студент буде автоматично доданий у чергу очікування.
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                    <i class="bi bi-arrow-left"></i> Скасувати
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-check-circle"></i> Видати / Додати в чергу
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <script>
+        document.getElementById('bookSelect').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var bookInfo = document.getElementById('bookInfo');
+            
+            if (selectedOption.value) {
+                var text = selectedOption.text;
+                if (text.includes('Доступно')) {
+                    bookInfo.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle"></i> Книгу можна видати зараз!</div>';
+                } else if (text.includes('Немає в наявності')) {
+                    bookInfo.innerHTML = '<div class="alert alert-warning"><i class="bi bi-clock-history"></i> Студента буде додано в чергу очікування</div>';
+                }
+            } else {
+                bookInfo.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-@model List<LibaryManagment.Models.BorrowingModel>
+@*@model List<LibaryManagment.Models.BorrowingModel>
 @{
     ViewData["Title"] = "Borrowing List";
 }
@@ -34,7 +34,9 @@
             <td>@item.StudentName</td>
             <td>@item.BookName</td>
             <td>@item.BorrowDate.ToShortDateString()</td>
-            <td>@item.ReturnedDate.ToShortDateString()</td>
+            <td>
+                @(item.ReturnedDate?.ToShortDateString() ?? "Not Returned")
+            </td>
             @if (User.IsInRole("admin") || User.IsInRole("lib"))
             {
                 <td>
@@ -45,4 +47,260 @@
 
         </tr>
     }
-</table>
+</table>*@
+
+@*@#1#model List<LibaryManagment.Models.BookModel>
+
+@{
+    ViewData["Title"] = "Books";
+}
+@if (User.IsInRole("admin") || User.IsInRole("lib"))
+{
+    <a class="btn btn-primary mt-3 ms-2" href="/Book/Create">Add New Book</a>
+}
+
+
+<table class="table table-bordered mt-3">
+    <thead>
+    <tr>
+        <th>BookId</th> 
+        <th>BookName</th>
+        <th>Author</th>
+        <th>Available</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookId</td> 
+            <td>@item.BookName</td>
+            <td>@item.Author</td>
+            <td>@(item.Available ? "Yes" : "No")</td>
+            @if (User.IsInRole("admin") || User.IsInRole("lib"))
+            {
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Book/Edit/@item.BookId">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Book/Delete/@item.BookName" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            }
+            
+        </tr>
+    }
+    </tbody>
+</table>#1#
+@model List<LibaryManagment.Models.BookModel>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+@if (User.IsInRole("admin") || User.IsInRole("lib"))
+{
+    <a class="btn btn-primary mt-3 ms-2" href="/Book/Create">Add New Book</a>
+}
+
+<table class="table table-bordered mt-3">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Copies Available</th>
+        <th>Copies Total</th>
+        <th>Year</th>
+        <th>Publisher</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookId</td>
+            <td>@item.BookName</td>
+            <td>@item.AuthorName</td>
+            <td>@item.CopiesAvailable</td>
+            <td>@item.CopiesTotal</td>
+            <td>@item.Year</td>
+            <td>@item.Publisher</td>
+            <td>@item.CategoryID</td>
+            <td>@item.BookDescription</td>
+            <td>
+                @if (item.BookImage != null && item.BookImage.Length > 0)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(item.BookImage)" 
+                         alt="Book Image" style="max-width: 80px; max-height: 100px;" />
+                }
+                else
+                {
+                    <span>No image</span>
+                }
+            </td>
+            @if (User.IsInRole("admin") || User.IsInRole("lib"))
+            {
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Book/Edit/@item.BookId">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Book/Delete/@item.BookId"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>*@
+
+
+@model List<LibaryManagment.Models.BorrowingModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Borrowings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Позики книг</h2>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["Info"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                @TempData["Info"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["Warning"] != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                @TempData["Warning"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (User.IsInRole("user") && ViewBag.UserQueue != null && ViewBag.UserQueue.Count > 0)
+        {
+            <div class="alert alert-info">
+                <h4><i class="bi bi-clock-history"></i> Ви в черзі на книги:</h4>
+                <ul class="mb-0">
+                    @foreach (var queue in ViewBag.UserQueue)
+                    {
+                        <li><strong>@queue.BookName</strong> - з @queue.RequestDate.ToString("dd.MM.yyyy HH:mm")</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        @if (User.IsInRole("admin") || User.IsInRole("lib"))
+        {
+            <div class="mb-3">
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Видати книгу
+                </a>
+                <a asp-action="Queue" class="btn btn-info">
+                    <i class="bi bi-people"></i> Переглянути чергу
+                </a>
+            </div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Студент</th>
+                        <th>Книга</th>
+                        <th>Дата видачі</th>
+                        <th>Дата повернення</th>
+                        <th>Статус</th>
+                        @if (User.IsInRole("admin") || User.IsInRole("lib"))
+                        {
+                            <th>Дії</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">Немає записів</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.BorrowingId</td>
+                                <td>@item.StudentName</td>
+                                <td>@item.BookName</td>
+                                <td>@item.BorrowDate.ToString("dd.MM.yyyy")</td>
+                                <td>
+                                    @if (item.ReturnedDate.HasValue)
+                                    {
+                                        @item.ReturnedDate.Value.ToString("dd.MM.yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger fw-bold">Не повернено</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.ReturnedDate.HasValue)
+                                    {
+                                        <span class="badge bg-success">Повернуто</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">На руках</span>
+                                    }
+                                </td>
+                                @if (User.IsInRole("admin") || User.IsInRole("lib"))
+                                {
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            @if (!item.ReturnedDate.HasValue)
+                                            {
+                                                <a asp-action="Return" asp-route-id="@item.BorrowingId" 
+                                                   class="btn btn-sm btn-success" 
+                                                   title="Повернути книгу">
+                                                    <i class="bi bi-check-circle"></i> Повернути
+                                                </a>
+                                            }
+                                            <a asp-action="Edit" asp-route-id="@item.BorrowingId" 
+                                               class="btn btn-sm btn-warning" 
+                                               title="Редагувати">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.BorrowingId" 
+                                               class="btn btn-sm btn-danger" 
+                                               onclick="return confirm('Ви впевнені, що хочете видалити цей запис?')"
+                                               title="Видалити">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</body>
+</html>

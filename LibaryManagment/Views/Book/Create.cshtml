@@ -48,12 +48,9 @@
 
     <div class="mb-3">
         <label>Author</label>
-        <input asp-for="AuthorName" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label>Author ID</label>
-        <input asp-for="AuthorID" class="form-control" />
+        <select asp-for="AuthorID" class="form-control" asp-items="@(new SelectList(ViewBag.Authors, "AuthorID", "AuthorName"))">
+            <option value="">-- Select Author --</option>
+        </select>
     </div>
 
     <div class="mb-3">
@@ -88,7 +85,17 @@
 
     <div class="mb-3">
         <label>Book Image</label>
-        <input type="file" name="BookImage" class="form-control" />
+        @*<input type="file" name="BookImage" class="form-control" />*@
+        @*<form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+        </form>*@
+        <label>Book Image</label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-success">Create</button>
