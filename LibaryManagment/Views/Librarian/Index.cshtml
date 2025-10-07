@@ -14,11 +14,15 @@
     <tr>
         @if (User.IsInRole("admin"))
         {
-            <th>LibrarianID</th> <!-- Add this line -->
+            <th>LibrarianID</th>
         }
         <th>Name</th>
         <th>Age</th>
         <th>Phone</th>
+        @if (User.IsInRole("admin"))
+        {
+            <th>Actions</th>
+        }
     </tr>
     </thead>
     <tbody>

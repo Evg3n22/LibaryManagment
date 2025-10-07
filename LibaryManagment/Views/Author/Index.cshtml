@@ -49,13 +49,16 @@
                     <td>@author.BirthYear</td>
                     <td>@author.Country</td>
                     <td>@(author.AuthorDescription?.Length > 50 ? author.AuthorDescription.Substring(0, 50) + "..." : author.AuthorDescription)</td>
+                    
+                    <td>
                     @if (User.IsInRole("admin") || User.IsInRole("lib"))
                     {
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@author.AuthorID" class="btn btn-sm btn-warning">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@author.AuthorID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this author?');">Delete</a>
-                        </td>
+                        <a asp-action="Edit" asp-route-id="@author.AuthorID" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@author.AuthorID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this author?');">Delete</a>
                     }
+                        <a asp-action="Details"  asp-route-id="@author.AuthorID" class="btn btn-info btn-sm">View Details</a>
+                        </td>
+                    
                 </tr>
             }
         </tbody>

@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/BookIndex.css"
     },
     {
+      "Id": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/HomeIndex.css",
+      "PackagePath": "staticwebassets/css/HomeIndex.css"
+    },
+    {
       "Id": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/login.css",
       "PackagePath": "staticwebassets/css/login.css"
     },

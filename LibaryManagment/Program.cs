@@ -11,10 +11,19 @@ builder.Services.AddControllersWithViews();
 
 // Add this to your Program.cs (before var app = builder.Build();)
 
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Example in Program.cs
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// The ServerVersion.AutoDetect is crucial for connecting to MySQL
+var serverVersion = ServerVersion.AutoDetect(connectionString); 
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
+{
+    options.UseMySql(connectionString, serverVersion);
+});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

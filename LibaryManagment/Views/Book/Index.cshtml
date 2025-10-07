@@ -4,7 +4,21 @@
     ViewData["Title"] = "Books";
 }
 
-<link rel="stylesheet" href="/css/BookIndex.css">
+<!doctype html>
+<html lang="en">
+
+<body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Library Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/BookIndex.css">
+</head>
+
+
 
 <div class="container-fluid px-4">
     <div class="books-header">
@@ -135,7 +149,7 @@
                             </div>
                             <div class="book-detail-item">
                                 <span class="book-detail-label">Category</span>
-                                <span class="book-detail-value">@item.CategoryID</span>
+                                <span class="book-detail-value">@item.CategoryName</span>
                             </div>
                             <div class="book-detail-item">
                                 <span class="book-detail-label">Book ID</span>
@@ -143,18 +157,24 @@
                             </div>
                         </div>
                         
-                        @if (User.IsInRole("admin") || User.IsInRole("lib"))
-                        {
-                            <div class="book-card-actions">
-                                <a class="btn btn-warning" href="/Book/Edit/@item.BookId">
-                                    ✏️ Edit
+                        
+                        <div class="card-footer">
+                            <a asp-action="Details" asp-route-id="@item.BookId" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                            @if (User.IsInRole("admin") || User.IsInRole("lib"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.BookId" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger" href="/Book/Delete/@item.BookId"
+                                <a asp-action="Delete" asp-route-id="@item.BookId" class="btn btn-danger btn-sm"
                                    onclick="return confirm('Are you sure you want to delete this book?')">
-                                    🗑️ Delete
+                                    <i class="fas fa-trash"></i> Delete
                                 </a>
-                            </div>
-                        }
+                            }
+                        </div>
+                        
+                        
                     </div>
                 </div>
             }
@@ -169,3 +189,6 @@
         </div>
     }
 </div>
+
+</body>
+</html>

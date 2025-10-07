@@ -170,3 +170,107 @@ public class LoginController : Controller
 //         }
 //     }
 // }
+
+
+
+//
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.EntityFrameworkCore;
+// using System.Security.Claims;
+// using Microsoft.AspNetCore.Authentication;
+// using Microsoft.AspNetCore.Authentication.Cookies;
+// using LibaryManagment.Models;
+// using LibaryManagment.Data;
+//
+// namespace LibaryManagment.Controllers
+// {
+//     public class LoginController : Controller
+//     {
+//         private readonly ApplicationDbContext _context;
+//
+//         public LoginController(ApplicationDbContext context)
+//         {
+//             _context = context;
+//         }
+//
+//         public IActionResult Login()
+//         {
+//             return View();
+//         }
+//
+//         [HttpPost]
+//         public async Task<IActionResult> Verify(LoginModel usr)
+//         {
+//             // 1. Check static admin
+//             if (usr.username == "admin" && usr.password == "123")
+//             {
+//                 var claims = new List<Claim>
+//                 {
+//                     new Claim(ClaimTypes.Name, usr.username),
+//                     new Claim(ClaimTypes.Role, "admin")
+//                 };
+//
+//                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+//
+//                 await HttpContext.SignInAsync(
+//                     CookieAuthenticationDefaults.AuthenticationScheme,
+//                     new ClaimsPrincipal(claimsIdentity));
+//
+//                 return RedirectToAction("Index", "Home");
+//             }
+//
+//             // 2. Check Librarian
+//             var librarian = await _context.Librarians
+//                 .FirstOrDefaultAsync(l => l.Name == usr.username && l.Password == usr.password);
+//
+//             if (librarian != null)
+//             {
+//                 var claims = new List<Claim>
+//                 {
+//                     new Claim(ClaimTypes.Name, usr.username),
+//                     new Claim(ClaimTypes.Role, "lib")
+//                 };
+//
+//                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+//
+//                 await HttpContext.SignInAsync(
+//                     CookieAuthenticationDefaults.AuthenticationScheme,
+//                     new ClaimsPrincipal(claimsIdentity));
+//
+//                 return RedirectToAction("Index", "Home");
+//             }
+//
+//             // 3. Check Student
+//             var student = await _context.Students
+//                 .FirstOrDefaultAsync(s => s.StudentName.ToLower() == usr.username.ToLower() 
+//                                        && s.Password == usr.password);
+//
+//             if (student != null)
+//             {
+//                 var claims = new List<Claim>
+//                 {
+//                     new Claim(ClaimTypes.Name, student.StudentName),
+//                     new Claim(ClaimTypes.Role, "user")
+//                 };
+//
+//                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+//
+//                 await HttpContext.SignInAsync(
+//                     CookieAuthenticationDefaults.AuthenticationScheme,
+//                     new ClaimsPrincipal(claimsIdentity));
+//
+//                 return RedirectToAction("Index", "Home");
+//             }
+//
+//             // Login failed
+//             ViewBag.message = "Login Failed";
+//             return View("Login");
+//         }
+//
+//         public async Task<IActionResult> Logout()
+//         {
+//             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+//             return RedirectToAction("Login");
+//         }
+//     }
+// }

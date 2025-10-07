@@ -1,55 +1,138 @@
-﻿@{
-    ViewData["Title"] = "Home";
-}
+﻿@* @{ *@
+@*     ViewData["Title"] = "Home"; *@
+@* } *@
+@* *@
+@* <!-- Banner --> *@
+@* <div class="banner position-relative text-white text-center" style="background-image: url('/images/banner1.jpg'); height: 60vh; background-size: cover; background-position: center;"> *@
+@*     <div class="overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center"> *@
+@*         <div> *@
+@*             <h1 class="display-4">Welcome to Our Library</h1> *@
+@*             <p class="lead">Learn. Grow. Achieve.</p> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* <!-- Cards Section --> *@
+@* <div class="container my-5"> *@
+@*     <h2 class="text-center mb-4">Managing Students, Books, Librarian, Borrowing</h2> *@
+@*     <div class="row"> *@
+@*         <!-- Card 1 --> *@
+@*         <div class="col-md-4 mb-4"> *@
+@*             <div class="card shadow h-100 hover-shadow"> *@
+@*                 <img src="/images/student.jpg" class="card-img-top" alt="Students"> *@
+@*                 <div class="card-body d-flex flex-column"> *@
+@*                     <h5 class="card-title">Manage Students</h5> *@
+@*                     <p class="card-text">Manage students easiliy and efficiently, keep all student records.</p> *@
+@*                     <a href="/Student/Index" class="btn btn-primary mt-auto">Manage Student</a> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <!-- Card 2 --> *@
+@*         <div class="col-md-4 mb-4"> *@
+@*             <div class="card shadow h-100 hover-shadow"> *@
+@*                 <img src="/images/book1.jpg" class="card-img-top" alt="Books"> *@
+@*                 <div class="card-body d-flex flex-column"> *@
+@*                     <h5 class="card-title">Manange Books</h5> *@
+@*                     <p class="card-text">Manage books easiliy and efficiently, keep all accurate book records.</p> *@
+@*                     <a href="/Book/Index" class="btn btn-primary mt-auto">Manage Book</a> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <!-- Card 3 --> *@
+@*         <div class="col-md-4 mb-4"> *@
+@*             <div class="card shadow h-100 hover-shadow"> *@
+@*                 <img src="/images/librarian.jpg" class="card-img-top" alt="Librarians"> *@
+@*                 <div class="card-body d-flex flex-column"> *@
+@*                     <h5 class="card-title">Manage Librarians</h5> *@
+@*                     <p class="card-text">Manage librarian easiliy and efficiently, keep all librarian records.</p> *@
+@*                     <a href="/Librarian/Index" class="btn btn-primary mt-auto">Manage Librarian</a> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
 
-<!-- Banner -->
-<div class="banner position-relative text-white text-center" style="background-image: url('/images/banner1.jpg'); height: 60vh; background-size: cover; background-position: center;">
-    <div class="overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center">
-        <div>
-            <h1 class="display-4">Welcome to Our Library</h1>
-            <p class="lead">Learn. Grow. Achieve.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+
+    <link rel="stylesheet" href="/css/HomeIndex.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Library</h1>
+            <p>Learn. Grow. Achieve.</p>
+        </div>
+        <div class="wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-header">
+            <h2>Library Management System</h2>
+            <p>Efficiently manage all aspects of your library operations</p>
+        </div>
+
+        <div class="management-grid">
+            <!-- Students -->
+            <div class="management-card" onclick="location.href='/Student/Index'">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <h3>Students</h3>
+                <p>Manage student records, enrollments, and maintain accurate information</p>
+                <a href="/Student/Index" class="btn">Manage Students</a>
+            </div>
+
+            <!-- Books -->
+            <div class="management-card" onclick="location.href='/Book/Index'">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                    </svg>
+                </div>
+                <h3>Books</h3>
+                <p>Catalog and track your entire book collection with ease</p>
+                <a href="/Book/Index" class="btn">Manage Books</a>
+            </div>
+
+            <!-- Librarians -->
+            <div class="management-card" onclick="location.href='/Librarian/Index'">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </div>
+                <h3>Librarians</h3>
+                <p>Oversee staff management and coordinate library operations</p>
+                <a href="/Librarian/Index" class="btn">Manage Librarians</a>
+            </div>
+
+            <!-- Borrowing -->
+            <div class="management-card" onclick="location.href='/Borrowing/Index'">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                </div>
+                <h3>Borrowing</h3>
+                <p>Track book loans, returns, and manage borrowing schedules</p>
+                <a href="/Borrowing/Index" class="btn">Manage Borrowing</a>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- Cards Section -->
-<div class="container my-5">
-    <h2 class="text-center mb-4">Managing Students, Books, Librarian, Borrowing</h2>
-    <div class="row">
-        <!-- Card 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100 hover-shadow">
-                <img src="/images/student.jpg" class="card-img-top" alt="Students">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Manage Students</h5>
-                    <p class="card-text">Manage students easiliy and efficiently, keep all student records.</p>
-                    <a href="/Student/Index" class="btn btn-primary mt-auto">Manage Student</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100 hover-shadow">
-                <img src="/images/book1.jpg" class="card-img-top" alt="Books">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Manange Books</h5>
-                    <p class="card-text">Manage books easiliy and efficiently, keep all accurate book records.</p>
-                    <a href="/Book/Index" class="btn btn-primary mt-auto">Manage Book</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100 hover-shadow">
-                <img src="/images/librarian.jpg" class="card-img-top" alt="Librarians">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Manage Librarians</h5>
-                    <p class="card-text">Manage librarian easiliy and efficiently, keep all librarian records.</p>
-                    <a href="/Librarian/Index" class="btn btn-primary mt-auto">Manage Librarian</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</body>
+</html>

@@ -117,3 +117,88 @@ public class LibrarianController : Controller
             return RedirectToAction("Index");
         }
 }
+
+
+
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.EntityFrameworkCore;
+// using LibaryManagment.Models;
+// using LibaryManagment.Data;
+// using Microsoft.AspNetCore.Authorization;
+//
+// namespace LibaryManagment.Controllers
+// {
+//     public class LibrarianController : Controller
+//     {
+//         private readonly ApplicationDbContext _context;
+//
+//         public LibrarianController(ApplicationDbContext context)
+//         {
+//             _context = context;
+//         }
+//
+//         public async Task<IActionResult> Index()
+//         {
+//             var librarians = await _context.Librarians.ToListAsync();
+//             return View(librarians);
+//         }
+//
+//         [Authorize(Roles = "admin")]
+//         public IActionResult Create()
+//         {
+//             return View();
+//         }
+//
+//         [HttpPost]
+//         public async Task<IActionResult> Create(LibrarianModel model)
+//         {
+//             if (!ModelState.IsValid)
+//             {
+//                 var errors = string.Join(", ", ModelState.Values
+//                     .SelectMany(v => v.Errors)
+//                     .Select(e => e.ErrorMessage));
+//                 ViewBag.Errors = errors;
+//                 return View(model);
+//             }
+//
+//             _context.Librarians.Add(model);
+//             await _context.SaveChangesAsync();
+//
+//             return RedirectToAction("Index");
+//         }
+//
+//         [Authorize(Roles = "admin")]
+//         public async Task<IActionResult> Edit(int id)
+//         {
+//             var librarian = await _context.Librarians.FindAsync(id);
+//             if (librarian == null)
+//                 return NotFound();
+//
+//             return View(librarian);
+//         }
+//
+//         [HttpPost]
+//         public async Task<IActionResult> Edit(LibrarianModel model)
+//         {
+//             if (!ModelState.IsValid)
+//                 return View(model);
+//
+//             _context.Librarians.Update(model);
+//             await _context.SaveChangesAsync();
+//
+//             return RedirectToAction("Index");
+//         }
+//
+//         [Authorize(Roles = "admin")]
+//         public async Task<IActionResult> Delete(int id)
+//         {
+//             var librarian = await _context.Librarians.FindAsync(id);
+//             if (librarian != null)
+//             {
+//                 _context.Librarians.Remove(librarian);
+//                 await _context.SaveChangesAsync();
+//             }
+//             return RedirectToAction("Index");
+//         }
+//     }
+// }

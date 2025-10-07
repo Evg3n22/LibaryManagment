@@ -74,6 +74,57 @@ namespace LibaryManagment.Controllers
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
+        
+        // Add this method to your AuthorController class
+
+        // GET: Author Details
+        public IActionResult Details(int id)
+        {
+            AuthorModel author = new();
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            var cmd = new MySqlCommand("SELECT * FROM Author WHERE AuthorID=@id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            con.Open();
+    
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                author.AuthorID = Convert.ToInt32(reader["AuthorID"]);
+                author.AuthorName = reader["AuthorName"].ToString();
+                author.BirthYear = Convert.ToInt32(reader["BirthYear"]);
+                author.Country = reader["Country"].ToString();
+                author.AuthorDescription = reader["AuthorDescription"].ToString();
+                author.AuthorImage = reader["AuthorImage"] as byte[];
+            }
+    
+            // Get books by this author
+            var books = new List<BookModel>();
+            using (var con2 = new MySqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                var cmdBooks = new MySqlCommand(
+                    @"SELECT BookId, BookName, Year, Publisher, CopiesAvailable 
+              FROM Books WHERE AuthorID = @authorId 
+              ORDER BY Year DESC", con2);
+                cmdBooks.Parameters.AddWithValue("@authorId", id);
+                con2.Open();
+        
+                using var readerBooks = cmdBooks.ExecuteReader();
+                while (readerBooks.Read())
+                {
+                    books.Add(new BookModel
+                    {
+                        BookId = Convert.ToInt32(readerBooks["BookId"]),
+                        BookName = readerBooks["BookName"].ToString(),
+                        Year = Convert.ToInt32(readerBooks["Year"]),
+                        Publisher = readerBooks["Publisher"].ToString(),
+                        CopiesAvailable = Convert.ToInt32(readerBooks["CopiesAvailable"])
+                    });
+                }
+            }
+    
+            ViewBag.Books = books;
+            return View(author);
+        }
 
         // GET: Edit author
         [Authorize(Roles = "admin,lib")]
@@ -142,3 +193,96 @@ namespace LibaryManagment.Controllers
         }
     }
 }
+//
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.EntityFrameworkCore;
+// using LibaryManagment.Models;
+// using LibaryManagment.Data;
+// using Microsoft.AspNetCore.Authorization;
+//
+// namespace LibaryManagment.Controllers
+// {
+//     public class AuthorController : Controller
+//     {
+//         private readonly ApplicationDbContext _context;
+//
+//         public AuthorController(ApplicationDbContext context)
+//         {
+//             _context = context;
+//         }
+//
+//         public async Task<IActionResult> Index()
+//         {
+//             var authors = await _context.Authors.ToListAsync();
+//             return View(authors);
+//         }
+//
+//         [Authorize(Roles = "admin,lib")]
+//         public IActionResult Create()
+//         {
+//             return View();
+//         }
+//
+//         [HttpPost]
+//         public async Task<IActionResult> Create(AuthorModel author)
+//         {
+//             if (!ModelState.IsValid)
+//                 return View(author);
+//
+//             // Handle image upload
+//             if (author.ImageFile != null)
+//             {
+//                 using var memoryStream = new MemoryStream();
+//                 await author.ImageFile.CopyToAsync(memoryStream);
+//                 author.AuthorImage = memoryStream.ToArray();
+//             }
+//
+//             _context.Authors.Add(author);
+//             await _context.SaveChangesAsync();
+//
+//             return RedirectToAction("Index");
+//         }
+//
+//         [Authorize(Roles = "admin,lib")]
+//         public async Task<IActionResult> Edit(int id)
+//         {
+//             var author = await _context.Authors.FindAsync(id);
+//             if (author == null)
+//                 return NotFound();
+//
+//             return View(author);
+//         }
+//
+//         [HttpPost]
+//         public async Task<IActionResult> Edit(AuthorModel author)
+//         {
+//             if (!ModelState.IsValid)
+//                 return View(author);
+//
+//             // Handle image upload if new image provided
+//             if (author.ImageFile != null)
+//             {
+//                 using var memoryStream = new MemoryStream();
+//                 await author.ImageFile.CopyToAsync(memoryStream);
+//                 author.AuthorImage = memoryStream.ToArray();
+//             }
+//
+//             _context.Authors.Update(author);
+//             await _context.SaveChangesAsync();
+//
+//             return RedirectToAction("Index");
+//         }
+//
+//         [Authorize(Roles = "admin,lib")]
+//         public async Task<IActionResult> Delete(int id)
+//         {
+//             var author = await _context.Authors.FindAsync(id);
+//             if (author != null)
+//             {
+//                 _context.Authors.Remove(author);
+//                 await _context.SaveChangesAsync();
+//             }
+//             return RedirectToAction("Index");
+//         }
+//     }
+// }

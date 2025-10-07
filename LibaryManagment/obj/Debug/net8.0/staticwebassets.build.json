@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O0xHnUV24GlTMaWSmz2E8B87hwWk+lXIXR5V/79uhSs=",
+  "Hash": "4YdDf2RtGfvYL/0E/jbXWEdKUF5+PDHgIMJwJyD5t6Y=",
   "Source": "LibaryManagment",
   "BasePath": "_content/LibaryManagment",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/BookIndex.css"
+    },
+    {
+      "Identity": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/HomeIndex.css",
+      "SourceId": "LibaryManagment",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/",
+      "BasePath": "_content/LibaryManagment",
+      "RelativePath": "css/HomeIndex.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/HomeIndex.css"
     },
     {
       "Identity": "/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/wwwroot/css/login.css",
