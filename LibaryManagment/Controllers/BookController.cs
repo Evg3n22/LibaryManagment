@@ -17,12 +17,170 @@ namespace LibaryManagment.Controllers
         
         
         
-       // GET: List of books with search and filters
-        public IActionResult Index(string searchTerm, int? categoryId, string availability, int? year)
-        {
-            var books = new List<BookModel>();
-            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-            
+    //    // GET: List of books with search and filters
+    //     public IActionResult Index(string searchTerm, int? categoryId, string availability, int? year)
+    //     {
+    //         var books = new List<BookModel>();
+    //         using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+    //         
+    //     // Updated query to JOIN with Categories table to get CategoryName
+    //     var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
+    //                          b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
+    //                          b.BookDescription, b.CategoryID, b.BookImage,
+    //                          c.CategoryName
+    //                   FROM Books b 
+    //                   LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
+    //                   WHERE 1=1";
+    //     var parameters = new List<MySqlParameter>();
+    //     
+    //     // Search by book name, author, or publisher
+    //     if (!string.IsNullOrEmpty(searchTerm))
+    //     {
+    //         query += " AND (b.BookName LIKE @searchTerm OR b.AuthorName LIKE @searchTerm OR b.Publisher LIKE @searchTerm)";
+    //         parameters.Add(new MySqlParameter("@searchTerm", $"%{searchTerm}%"));
+    //     }
+    //     
+    //     // Filter by category
+    //     if (categoryId.HasValue && categoryId.Value > 0)
+    //     {
+    //         query += " AND b.CategoryID = @categoryId";
+    //         parameters.Add(new MySqlParameter("@categoryId", categoryId.Value));
+    //     }
+    //     
+    //     // Filter by availability
+    //     if (!string.IsNullOrEmpty(availability))
+    //     {
+    //         if (availability == "available")
+    //         {
+    //             query += " AND b.CopiesAvailable > 0";
+    //         }
+    //         else if (availability == "unavailable")
+    //         {
+    //             query += " AND b.CopiesAvailable = 0";
+    //         }
+    //     }
+    //     
+    //     // Filter by year
+    //     if (year.HasValue && year.Value > 0)
+    //     {
+    //         query += " AND b.Year = @year";
+    //         parameters.Add(new MySqlParameter("@year", year.Value));
+    //     }
+    //     
+    //     var cmd = new MySqlCommand(query, con);
+    //     foreach (var param in parameters)
+    //     {
+    //         cmd.Parameters.Add(param);
+    //     }
+    //     
+    //     con.Open();
+    //     using var reader = cmd.ExecuteReader();
+    //     while (reader.Read())
+    //     {
+    //         books.Add(new BookModel
+    //         {
+    //             BookId = Convert.ToInt32(reader["BookId"]),
+    //             BookName = reader["BookName"].ToString(),
+    //             AuthorName = reader["AuthorName"].ToString(),
+    //             AuthorID = Convert.ToInt32(reader["AuthorID"]),
+    //             CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]),
+    //             CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]),
+    //             Year = Convert.ToInt32(reader["Year"]),
+    //             Publisher = reader["Publisher"].ToString(),
+    //             BookDescription = reader["BookDescription"].ToString(),
+    //             CategoryID = Convert.ToInt32(reader["CategoryID"]),
+    //             CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized",
+    //             BookImage = reader["BookImage"] as byte[]
+    //         });
+    //     }
+    //     
+    //     // Get categories for filter dropdown from Categories table
+    //     var categories = new List<dynamic>();
+    //     using (var con2 = new MySqlConnection(_config.GetConnectionString("DefaultConnection")))
+    //     {
+    //         var cmdCat = new MySqlCommand("SELECT CategoryID, CategoryName FROM Categories ORDER BY CategoryName", con2);
+    //         con2.Open();
+    //         using var readerCat = cmdCat.ExecuteReader();
+    //         while (readerCat.Read())
+    //         {
+    //             categories.Add(new
+    //             {
+    //                 CategoryID = Convert.ToInt32(readerCat["CategoryID"]),
+    //                 CategoryName = readerCat["CategoryName"].ToString()
+    //             });
+    //         }
+    //     }
+    //     
+    //     // Get unique years for filter dropdown
+    //     var years = new List<int>();
+    //     using (var con3 = new MySqlConnection(_config.GetConnectionString("DefaultConnection")))
+    //     {
+    //         var cmdYear = new MySqlCommand("SELECT DISTINCT Year FROM Books WHERE Year IS NOT NULL ORDER BY Year DESC", con3);
+    //         con3.Open();
+    //         using var readerYear = cmdYear.ExecuteReader();
+    //         while (readerYear.Read())
+    //         {
+    //             years.Add(Convert.ToInt32(readerYear["Year"]));
+    //         }
+    //     }
+    //     
+    //     // Pass filter values back to view
+    //     ViewBag.SearchTerm = searchTerm;
+    //     ViewBag.CategoryId = categoryId?.ToString();
+    //     ViewBag.Availability = availability;
+    //     ViewBag.Year = year?.ToString();
+    //     ViewBag.Categories = categories;
+    //     ViewBag.Years = years;
+    //     
+    //     return View(books);
+    // }
+    //     
+    //     // Add this method to your BookController class
+    //
+    //     // GET: Book Details
+    //     public IActionResult Details(int id)
+    //     {
+    //         BookModel book = new();
+    //         using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+    //
+    //         var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
+    //                      b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
+    //                      b.BookDescription, b.CategoryID, b.BookImage,
+    //                      c.CategoryName
+    //               FROM Books b 
+    //               LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
+    //               WHERE b.BookId = @id";
+    //
+    //         var cmd = new MySqlCommand(query, con);
+    //         cmd.Parameters.AddWithValue("@id", id);
+    //         con.Open();
+    //
+    //         using var reader = cmd.ExecuteReader();
+    //         if (reader.Read())
+    //         {
+    //             book.BookId = Convert.ToInt32(reader["BookId"]);
+    //             book.BookName = reader["BookName"].ToString();
+    //             book.AuthorName = reader["AuthorName"].ToString();
+    //             book.AuthorID = Convert.ToInt32(reader["AuthorID"]);
+    //             book.CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]);
+    //             book.CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]);
+    //             book.Year = Convert.ToInt32(reader["Year"]);
+    //             book.Publisher = reader["Publisher"].ToString();
+    //             book.BookDescription = reader["BookDescription"].ToString();
+    //             book.CategoryID = Convert.ToInt32(reader["CategoryID"]);
+    //             book.CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized";
+    //             book.BookImage = reader["BookImage"] as byte[];
+    //         }
+    //
+    //         return View(book);
+    //     }
+    
+    // GET: List of books with search and filters
+    public IActionResult Index(string searchTerm, int? categoryId, string availability, int? year)
+    {
+        var books = new List<BookModel>();
+        using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+        
         // Updated query to JOIN with Categories table to get CategoryName
         var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
                              b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
@@ -33,11 +191,31 @@ namespace LibaryManagment.Controllers
                       WHERE 1=1";
         var parameters = new List<MySqlParameter>();
         
-        // Search by book name, author, or publisher
+        // Smart search with prefixes
         if (!string.IsNullOrEmpty(searchTerm))
         {
-            query += " AND (b.BookName LIKE @searchTerm OR b.AuthorName LIKE @searchTerm OR b.Publisher LIKE @searchTerm)";
-            parameters.Add(new MySqlParameter("@searchTerm", $"%{searchTerm}%"));
+            searchTerm = searchTerm.Trim();
+            
+            if (searchTerm.StartsWith("author:", StringComparison.OrdinalIgnoreCase))
+            {
+                // Search by author only
+                var authorSearch = searchTerm.Substring(7).Trim();
+                query += " AND b.AuthorName LIKE @searchTerm";
+                parameters.Add(new MySqlParameter("@searchTerm", $"%{authorSearch}%"));
+            }
+            else if (searchTerm.StartsWith("publisher:", StringComparison.OrdinalIgnoreCase))
+            {
+                // Search by publisher only
+                var publisherSearch = searchTerm.Substring(10).Trim();
+                query += " AND b.Publisher LIKE @searchTerm";
+                parameters.Add(new MySqlParameter("@searchTerm", $"%{publisherSearch}%"));
+            }
+            else
+            {
+                // Default: search by book name only
+                query += " AND b.BookName LIKE @searchTerm";
+                parameters.Add(new MySqlParameter("@searchTerm", $"%{searchTerm}%"));
+            }
         }
         
         // Filter by category
@@ -134,46 +312,6 @@ namespace LibaryManagment.Controllers
         
         return View(books);
     }
-        
-        // Add this method to your BookController class
-
-        // GET: Book Details
-        public IActionResult Details(int id)
-        {
-            BookModel book = new();
-            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    
-            var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
-                         b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
-                         b.BookDescription, b.CategoryID, b.BookImage,
-                         c.CategoryName
-                  FROM Books b 
-                  LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
-                  WHERE b.BookId = @id";
-    
-            var cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@id", id);
-            con.Open();
-    
-            using var reader = cmd.ExecuteReader();
-            if (reader.Read())
-            {
-                book.BookId = Convert.ToInt32(reader["BookId"]);
-                book.BookName = reader["BookName"].ToString();
-                book.AuthorName = reader["AuthorName"].ToString();
-                book.AuthorID = Convert.ToInt32(reader["AuthorID"]);
-                book.CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]);
-                book.CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]);
-                book.Year = Convert.ToInt32(reader["Year"]);
-                book.Publisher = reader["Publisher"].ToString();
-                book.BookDescription = reader["BookDescription"].ToString();
-                book.CategoryID = Convert.ToInt32(reader["CategoryID"]);
-                book.CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized";
-                book.BookImage = reader["BookImage"] as byte[];
-            }
-    
-            return View(book);
-        }
         
         
         
@@ -345,133 +483,3 @@ namespace LibaryManagment.Controllers
 
     }
 }
-
-
-
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.EntityFrameworkCore;
-// using LibaryManagment.Models;
-// using LibaryManagment.Data;
-// using Microsoft.AspNetCore.Authorization;
-//
-// namespace LibaryManagment.Controllers
-// {
-//     public class BookController : Controller
-//     {
-//         private readonly ApplicationDbContext _context;
-//
-//         public BookController(ApplicationDbContext context)
-//         {
-//             _context = context;
-//         }
-//
-//         public async Task<IActionResult> Index()
-//         {
-//             var books = await _context.Books.ToListAsync();
-//             return View(books);
-//         }
-//
-//         [Authorize(Roles = "admin,lib")]
-//         public async Task<IActionResult> Create()
-//         {
-//             ViewBag.Authors = await _context.Authors.ToListAsync();
-//             ViewBag.Categories = await _context.Categories.ToListAsync();
-//             return View();
-//         }
-//
-//         [HttpPost]
-//         public async Task<IActionResult> Create(BookModel book)
-//         {
-//             if (!ModelState.IsValid)
-//             {
-//                 ViewBag.Authors = await _context.Authors.ToListAsync();
-//                 ViewBag.Categories = await _context.Categories.ToListAsync();
-//                 return View(book);
-//             }
-//
-//             // Get author and category names
-//             var author = await _context.Authors.FindAsync(book.AuthorID);
-//             var category = await _context.Categories.FindAsync(book.CategoryID);
-//
-//             book.AuthorName = author?.AuthorName;
-//             book.CategoryName = category?.CategoryName;
-//
-//             // Handle image upload
-//             if (book.ImageFile != null)
-//             {
-//                 using var memoryStream = new MemoryStream();
-//                 await book.ImageFile.CopyToAsync(memoryStream);
-//                 book.BookImage = memoryStream.ToArray();
-//             }
-//
-//             _context.Books.Add(book);
-//             await _context.SaveChangesAsync();
-//
-//             return RedirectToAction("Index");
-//         }
-//
-//         [Authorize(Roles = "admin,lib")]
-//         public async Task<IActionResult> Edit(int id)
-//         {
-//             var book = await _context.Books.FindAsync(id);
-//             if (book == null)
-//                 return NotFound();
-//
-//             ViewBag.Authors = await _context.Authors.ToListAsync();
-//             ViewBag.Categories = await _context.Categories.ToListAsync();
-//             return View(book);
-//         }
-//
-//         [HttpPost]
-//         public async Task<IActionResult> Edit(BookModel book)
-//         {
-//             if (!ModelState.IsValid)
-//             {
-//                 ViewBag.Authors = await _context.Authors.ToListAsync();
-//                 ViewBag.Categories = await _context.Categories.ToListAsync();
-//                 return View(book);
-//             }
-//
-//             // Get author and category names
-//             var author = await _context.Authors.FindAsync(book.AuthorID);
-//             var category = await _context.Categories.FindAsync(book.CategoryID);
-//
-//             book.AuthorName = author?.AuthorName;
-//             book.CategoryName = category?.CategoryName;
-//
-//             // Handle image upload if new image provided
-//             if (book.ImageFile != null)
-//             {
-//                 using var memoryStream = new MemoryStream();
-//                 await book.ImageFile.CopyToAsync(memoryStream);
-//                 book.BookImage = memoryStream.ToArray();
-//             }
-//
-//             _context.Books.Update(book);
-//             await _context.SaveChangesAsync();
-//
-//             return RedirectToAction("Index");
-//         }
-//
-//         [Authorize(Roles = "admin,lib")]
-//         public async Task<IActionResult> Delete(int id)
-//         {
-//             var book = await _context.Books.FindAsync(id);
-//             if (book != null)
-//             {
-//                 _context.Books.Remove(book);
-//                 await _context.SaveChangesAsync();
-//             }
-//             return RedirectToAction("Index");
-//         }
-//
-//         public async Task<IActionResult> Details(int id)
-//         {
-//             var book = await _context.Books.FindAsync(id);
-//             if (book == null)
-//                 return NotFound();
-//
-//             return View(book);
-//         }
-//     }
-// }

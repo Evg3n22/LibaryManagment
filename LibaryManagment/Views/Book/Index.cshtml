@@ -37,11 +37,18 @@
             <div class="search-bar">
                 <div class="search-input-group">
                     <span class="search-icon">🔍</span>
+                    @* <input type="text"  *@
+                    @*        name="searchTerm"  *@
+                    @*        class="search-input"  *@
+                    @*        placeholder="Search by book name, author, or publisher..." *@
+                    @*        value="@ViewBag.SearchTerm" /> *@
+                    
                     <input type="text" 
                            name="searchTerm" 
                            class="search-input" 
-                           placeholder="Search by book name, author, or publisher..."
-                           value="@ViewBag.SearchTerm" />
+                           placeholder="Search book title (use author: or publisher: for specific search)..."
+                           value="@ViewBag.SearchTerm" 
+                           title="Приклади: 'Harry Potter', 'author:Tolkien', 'publisher:Penguin'" />
                 </div>
             </div>
             

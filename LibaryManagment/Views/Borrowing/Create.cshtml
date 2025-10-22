@@ -1,60 +1,9 @@
-@*@model LibaryManagment.Models.BorrowingModel
-@{
-    ViewData["Title"] = "Add Borrowing";
-}
-<h2>Add Borrowing</h2>
-
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        $1$<label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />#1#
-        
-            <label for="StudentName">StudentName</label>
-            <select asp-for="StudentName" class="form-control" asp-items="@(new SelectList(ViewBag.Students))">
-                <option value="">-- Select Student --</option>
-            </select>
-        
-    </div>
-    <div class="mb-3">
-        <label for="BookName">BookName</label>
-        <select asp-for="BookName" class="form-control" asp-items="@(new SelectList(ViewBag.Books))">
-            <option value="">-- Select Book --</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label>BorrowDate</label>
-        <input asp-for="BorrowDate" type="date" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>ReturnedDate</label>
-        <input asp-for="ReturnedDate" type="date" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
-
-<script>
-    function validateForm() {
-        const studentname = document.querySelector('[name="StudentName"]').value.trim();
-        const bookname = document.querySelector('[name="BookName"]').value.trim();
-        const borrowdate = document.querySelector('[name="BorrowDate"]').value.trim();
-        const returneddate = document.querySelector('[name="ReturnedDate"]').value.trim();
-
-        if (!studentname || !bookname || !borrowdate || !returneddate) {
-            alert("All fields are required: StudentName, BookName, BorrowDate, and ReturnedDate.");
-            return false; // prevent form submission
-        }
-
-        return true; // allow submission
-    }
-</script>*@
-
 @model LibaryManagment.Models.BorrowingModel
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Видати книгу</title>
+    <title>Issue Book</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .available {
@@ -71,95 +20,95 @@
     </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0"><i class="bi bi-book"></i> Видати книгу студенту</h3>
-                    </div>
-                    <div class="card-body">
-                        <form asp-action="Create" method="post">
-                            <div class="mb-4">
-                                <label for="StudentName" class="form-label fw-bold">
-                                    <i class="bi bi-person"></i> Студент
-                                </label>
-                                <select asp-for="StudentName" class="form-select form-select-lg" required>
-                                    <option value="">-- Оберіть студента --</option>
-                                    @foreach (var student in ViewBag.Students)
-                                    {
-                                        <option value="@student">@student</option>
-                                    }
-                                </select>
-                            </div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="bi bi-book"></i> Issue Book to Student</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div class="mb-4">
+                            <label for="StudentName" class="form-label fw-bold">
+                                <i class="bi bi-person"></i> Student
+                            </label>
+                            <select asp-for="StudentName" class="form-select form-select-lg" required>
+                                <option value="">-- Select a student --</option>
+                                @foreach (var student in ViewBag.Students)
+                                {
+                                <option value="@student">@student</option>
+                                }
+                            </select>
+                        </div>
 
-                            <div class="mb-4">
-                                <label for="BookName" class="form-label fw-bold">
-                                    <i class="bi bi-journal-bookmark"></i> Книга
-                                </label>
-                                <select asp-for="BookName" class="form-select form-select-lg" id="bookSelect" required>
-                                    <option value="">-- Оберіть книгу --</option>
-                                    @foreach (var book in ViewBag.Books)
-                                    {
-                                        int available = ViewBag.BookAvailability[book];
-                                        if (available > 0)
-                                        {
-                                            <option value="@book" class="book-option">
-                                                @book 
-                                                <span class="available">(✓ Доступно: @available копій)</span>
-                                            </option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@book" class="book-option">
-                                                @book 
-                                                <span class="unavailable">(⏳ Немає в наявності - буде додано в чергу)</span>
-                                            </option>
-                                        }
-                                    }
-                                </select>
-                                <div id="bookInfo" class="mt-2"></div>
-                            </div>
+                        <div class="mb-4">
+                            <label for="BookName" class="form-label fw-bold">
+                                <i class="bi bi-journal-bookmark"></i> Book
+                            </label>
+                            <select asp-for="BookName" class="form-select form-select-lg" id="bookSelect" required>
+                                <option value="">-- Select a book --</option>
+                                @foreach (var book in ViewBag.Books)
+                                {
+                                int available = ViewBag.BookAvailability[book];
+                                if (available > 0)
+                                {
+                                <option value="@book" class="book-option">
+                                    @book
+                                    <span class="available">(✓ Available: @available copies)</span>
+                                </option>
+                                }
+                                else
+                                {
+                                <option value="@book" class="book-option">
+                                    @book
+                                    <span class="unavailable">(⏳ Not available - will be added to the queue)</span>
+                                </option>
+                                }
+                                }
+                            </select>
+                            <div id="bookInfo" class="mt-2"></div>
+                        </div>
 
-                            <div class="alert alert-info">
-                                <i class="bi bi-info-circle"></i> 
-                                <strong>Примітка:</strong> Якщо книги немає в наявності, студент буде автоматично доданий у чергу очікування.
-                            </div>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Note:</strong> If a book is not available, the student will automatically be added to the waiting queue.
+                        </div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a asp-action="Index" class="btn btn-secondary btn-lg">
-                                    <i class="bi bi-arrow-left"></i> Скасувати
-                                </a>
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="bi bi-check-circle"></i> Видати / Додати в чергу
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                <i class="bi bi-arrow-left"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle"></i> Issue / Add to Queue
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <script>
-        document.getElementById('bookSelect').addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var bookInfo = document.getElementById('bookInfo');
-            
-            if (selectedOption.value) {
-                var text = selectedOption.text;
-                if (text.includes('Доступно')) {
-                    bookInfo.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle"></i> Книгу можна видати зараз!</div>';
-                } else if (text.includes('Немає в наявності')) {
-                    bookInfo.innerHTML = '<div class="alert alert-warning"><i class="bi bi-clock-history"></i> Студента буде додано в чергу очікування</div>';
-                }
-            } else {
-                bookInfo.innerHTML = '';
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<script>
+    document.getElementById('bookSelect').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var bookInfo = document.getElementById('bookInfo');
+
+        if (selectedOption.value) {
+            var text = selectedOption.text;
+            if (text.includes('Available')) {
+                bookInfo.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle"></i> The book can be issued now!</div>';
+            } else if (text.includes('Not available')) {
+                bookInfo.innerHTML = '<div class="alert alert-warning"><i class="bi bi-clock-history"></i> The student will be added to the waiting queue.</div>';
             }
-        });
-    </script>
+        } else {
+            bookInfo.innerHTML = '';
+        }
+    });
+</script>
 </body>
 </html>

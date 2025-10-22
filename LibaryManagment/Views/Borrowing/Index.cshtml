@@ -1,160 +1,3 @@
-@*@model List<LibaryManagment.Models.BorrowingModel>
-@{
-    ViewData["Title"] = "Borrowing List";
-}
-@if (User.IsInRole("admin") || User.IsInRole("lib"))
-{
-    <a class="btn btn-primary mt-3 ms-2" href="/Borrowing/Create">Add New Borrowing</a>    
-}
-
-
-<table class="table table-bordered mt-3">
-    <tr>
-        @if (User.IsInRole("admin") || User.IsInRole("lib"))
-        {
-            <th>BorrowingID</th>
-        }
-        <th>StudentName</th>
-        <th>BookName</th>
-        <th>BorrowDate</th>
-        <th>ReturnedDate</th>
-        @if (User.IsInRole("admin") || User.IsInRole("lib"))
-        {
-            <th>Actions</th>
-        }
-        
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            @if (User.IsInRole("admin") || User.IsInRole("lib"))
-            {
-                <td>@item.BorrowingId</td>
-            }
-            <td>@item.StudentName</td>
-            <td>@item.BookName</td>
-            <td>@item.BorrowDate.ToShortDateString()</td>
-            <td>
-                @(item.ReturnedDate?.ToShortDateString() ?? "Not Returned")
-            </td>
-            @if (User.IsInRole("admin") || User.IsInRole("lib"))
-            {
-                <td>
-                    <a href="/Borrowing/Edit/@item.BorrowingId" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="/Borrowing/Delete/@item.BorrowingId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            }
-
-        </tr>
-    }
-</table>*@
-
-@*@#1#model List<LibaryManagment.Models.BookModel>
-
-@{
-    ViewData["Title"] = "Books";
-}
-@if (User.IsInRole("admin") || User.IsInRole("lib"))
-{
-    <a class="btn btn-primary mt-3 ms-2" href="/Book/Create">Add New Book</a>
-}
-
-
-<table class="table table-bordered mt-3">
-    <thead>
-    <tr>
-        <th>BookId</th> 
-        <th>BookName</th>
-        <th>Author</th>
-        <th>Available</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.BookId</td> 
-            <td>@item.BookName</td>
-            <td>@item.Author</td>
-            <td>@(item.Available ? "Yes" : "No")</td>
-            @if (User.IsInRole("admin") || User.IsInRole("lib"))
-            {
-                <td>
-                    <a class="btn btn-warning btn-sm" href="/Book/Edit/@item.BookId">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Book/Delete/@item.BookName" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            }
-            
-        </tr>
-    }
-    </tbody>
-</table>#1#
-@model List<LibaryManagment.Models.BookModel>
-
-@{
-    ViewData["Title"] = "Books";
-}
-
-@if (User.IsInRole("admin") || User.IsInRole("lib"))
-{
-    <a class="btn btn-primary mt-3 ms-2" href="/Book/Create">Add New Book</a>
-}
-
-<table class="table table-bordered mt-3">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Author</th>
-        <th>Copies Available</th>
-        <th>Copies Total</th>
-        <th>Year</th>
-        <th>Publisher</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.BookId</td>
-            <td>@item.BookName</td>
-            <td>@item.AuthorName</td>
-            <td>@item.CopiesAvailable</td>
-            <td>@item.CopiesTotal</td>
-            <td>@item.Year</td>
-            <td>@item.Publisher</td>
-            <td>@item.CategoryID</td>
-            <td>@item.BookDescription</td>
-            <td>
-                @if (item.BookImage != null && item.BookImage.Length > 0)
-                {
-                    <img src="data:image/png;base64,@Convert.ToBase64String(item.BookImage)" 
-                         alt="Book Image" style="max-width: 80px; max-height: 100px;" />
-                }
-                else
-                {
-                    <span>No image</span>
-                }
-            </td>
-            @if (User.IsInRole("admin") || User.IsInRole("lib"))
-            {
-                <td>
-                    <a class="btn btn-warning btn-sm" href="/Book/Edit/@item.BookId">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Book/Delete/@item.BookId"
-                       onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            }
-        </tr>
-    }
-    </tbody>
-</table>*@
-
-
 @model List<LibaryManagment.Models.BorrowingModel>
 
 <!DOCTYPE html>
@@ -165,7 +8,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2>Позики книг</h2>
+        <h2>Book Borrowings</h2>
 
         @if (TempData["Success"] != null)
         {
@@ -192,11 +35,11 @@
         @if (User.IsInRole("user") && ViewBag.UserQueue != null && ViewBag.UserQueue.Count > 0)
         {
             <div class="alert alert-info">
-                <h4><i class="bi bi-clock-history"></i> Ви в черзі на книги:</h4>
+                <h4><i class="bi bi-clock-history"></i> You are in queue for the following books:</h4>
                 <ul class="mb-0">
                     @foreach (var queue in ViewBag.UserQueue)
                     {
-                        <li><strong>@queue.BookName</strong> - з @queue.RequestDate.ToString("dd.MM.yyyy HH:mm")</li>
+                        <li><strong>@queue.BookName</strong> - since @queue.RequestDate.ToString("dd.MM.yyyy HH:mm")</li>
                     }
                 </ul>
             </div>
@@ -206,10 +49,10 @@
         {
             <div class="mb-3">
                 <a asp-action="Create" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Видати книгу
+                    <i class="bi bi-plus-circle"></i> Issue a Book
                 </a>
                 <a asp-action="Queue" class="btn btn-info">
-                    <i class="bi bi-people"></i> Переглянути чергу
+                    <i class="bi bi-people"></i> View Queue
                 </a>
             </div>
         }
@@ -219,14 +62,14 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Студент</th>
-                        <th>Книга</th>
-                        <th>Дата видачі</th>
-                        <th>Дата повернення</th>
-                        <th>Статус</th>
+                        <th>Student</th>
+                        <th>Book</th>
+                        <th>Borrow Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
                         @if (User.IsInRole("admin") || User.IsInRole("lib"))
                         {
-                            <th>Дії</th>
+                            <th>Actions</th>
                         }
                     </tr>
                 </thead>
@@ -234,7 +77,7 @@
                     @if (Model.Count == 0)
                     {
                         <tr>
-                            <td colspan="7" class="text-center text-muted">Немає записів</td>
+                            <td colspan="7" class="text-center text-muted">No records found</td>
                         </tr>
                     }
                     else
@@ -253,17 +96,17 @@
                                     }
                                     else
                                     {
-                                        <span class="text-danger fw-bold">Не повернено</span>
+                                        <span class="text-danger fw-bold">Not Returned</span>
                                     }
                                 </td>
                                 <td>
                                     @if (item.ReturnedDate.HasValue)
                                     {
-                                        <span class="badge bg-success">Повернуто</span>
+                                        <span class="badge bg-success">Returned</span>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-warning text-dark">На руках</span>
+                                        <span class="badge bg-warning text-dark">Borrowed</span>
                                     }
                                 </td>
                                 @if (User.IsInRole("admin") || User.IsInRole("lib"))
@@ -274,19 +117,19 @@
                                             {
                                                 <a asp-action="Return" asp-route-id="@item.BorrowingId" 
                                                    class="btn btn-sm btn-success" 
-                                                   title="Повернути книгу">
-                                                    <i class="bi bi-check-circle"></i> Повернути
+                                                   title="Return Book">
+                                                    <i class="bi bi-check-circle"></i> Return
                                                 </a>
                                             }
                                             <a asp-action="Edit" asp-route-id="@item.BorrowingId" 
                                                class="btn btn-sm btn-warning" 
-                                               title="Редагувати">
+                                               title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <a asp-action="Delete" asp-route-id="@item.BorrowingId" 
                                                class="btn btn-sm btn-danger" 
-                                               onclick="return confirm('Ви впевнені, що хочете видалити цей запис?')"
-                                               title="Видалити">
+                                               onclick="return confirm('Are you sure you want to delete this record?')"
+                                               title="Delete">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </div>

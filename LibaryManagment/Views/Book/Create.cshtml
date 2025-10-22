@@ -1,37 +1,3 @@
-@*@model LibaryManagment.Models.BookModel;
-
-
-@{
-    ViewData["Title"] = "Add Book";
-}
-<h2>Add Book</h2>
-
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        <label>BookName</label>
-        <input asp-for="BookName" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Author</label>
-        <input asp-for="AuthorName" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
-
-<script>
-    function validateForm(){
-        const bookname = document.querySelector('[name="BookName"]').value.trim();
-        const author = document.querySelector('[name="Author"]').value.trim();
-
-        if (!bookname || !author) {
-            alert("All fields are required: BookName and Author.");
-            return false; // prevent form submission
-        }
-
-        return true; //aloww submission
-    }
-</script>*@
 @model LibaryManagment.Models.BookModel
 
 @{
@@ -84,16 +50,6 @@
     </div>
 
     <div class="mb-3">
-        <label>Book Image</label>
-        @*<input type="file" name="BookImage" class="form-control" />*@
-        @*<form asp-action="Create" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" type="file" class="form-control" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-
-        </form>*@
         <label>Book Image</label>
         <input asp-for="ImageFile" type="file" class="form-control" />
     </div>
