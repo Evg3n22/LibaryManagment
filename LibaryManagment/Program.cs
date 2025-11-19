@@ -6,18 +6,10 @@ using DbContext = LibaryManagment.Data.ApplicationDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add this to your Program.cs (before var app = builder.Build();)
-
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Example in Program.cs
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// The ServerVersion.AutoDetect is crucial for connecting to MySQL
 var serverVersion = ServerVersion.AutoDetect(connectionString); 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -28,8 +20,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login/Login"; // сторінка для логіну
-        options.AccessDeniedPath = "/Login/AccessDenied"; // сторінка при відмові
+        options.LoginPath = "/Login/Login";
+        options.AccessDeniedPath = "/Login/AccessDenied";
     });
 var app = builder.Build();
 
