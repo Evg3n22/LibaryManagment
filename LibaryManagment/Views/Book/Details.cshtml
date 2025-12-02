@@ -129,6 +129,83 @@
                 </div>
             </div>
         </div>
+        
+        <!-- REVIEWS SECTION -->
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h3>📢 User Reviews</h3>
+        <hr />
+        
+        <!-- 1. Add Review Form (Only if Logged In) -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="card mb-4 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Leave a Review</h5>
+                    <form asp-action="AddReview" method="post">
+                        <input type="hidden" name="BookId" value="@Model.BookId" />
+                        
+                        <div class="row">
+                            <div class="col-md-2 mb-3">
+                                <label class="form-label">Rating</label>
+                                <select name="Rating" class="form-select">
+                                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                                    <option value="3">⭐⭐⭐ (3)</option>
+                                    <option value="2">⭐⭐ (2)</option>
+                                    <option value="1">⭐ (1)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label">Your Comment</label>
+                                <input name="Content" class="form-control" required placeholder="Write your thoughts here..." />
+                            </div>
+                            <div class="col-md-2 mb-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Please <a href="/Login/Login">login</a> to leave a review.
+            </div>
+        }
+
+        <!-- 2. List of Reviews -->
+        @if (ViewBag.Reviews != null)
+        {
+            var reviews = ViewBag.Reviews as List<LibaryManagment.Models.ReviewModel>;
+            if (reviews != null && reviews.Any())
+            {
+                foreach (var review in reviews)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <i class="fas fa-user-circle"></i> @review.UserName
+                                </h6>
+                                <span class="text-warning">
+                                    @for(int i=0; i<review.Rating; i++) { <span>★</span> }
+                                </span>
+                            </div>
+                            <p class="card-text mt-2">@review.Content</p>
+                            <small class="text-muted">Posted on @review.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">No reviews yet. Be the first to review!</p>
+            }
+        }
+    </div>
+</div>
     </div>
 </div>
 

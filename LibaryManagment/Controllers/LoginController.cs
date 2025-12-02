@@ -57,7 +57,8 @@ public class LoginController : Controller
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usr.username),
-                    new Claim(ClaimTypes.Role, "lib")
+                    new Claim(ClaimTypes.Role, "lib"),
+                    new Claim(ClaimTypes.Role, "moderator")
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

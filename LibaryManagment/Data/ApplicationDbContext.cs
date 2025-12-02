@@ -18,6 +18,7 @@ namespace LibaryManagment.Data
         public DbSet<LibrarianModel> Librarians { get; set; }
         public DbSet<BorrowingModel> Borrowings { get; set; }
         public DbSet<QueueModel> BookQueue { get; set; }
+        public DbSet<ReviewModel> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

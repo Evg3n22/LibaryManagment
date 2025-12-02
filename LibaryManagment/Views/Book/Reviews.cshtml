@@ -1,0 +1,67 @@
+@model List<LibaryManagment.Models.ReviewModel>
+
+@{
+    ViewData["Title"] = "Moderation Panel";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🛡️ Moderation Panel</h2>
+        <a href="/Book/Index" class="btn btn-outline-secondary">Back to Books</a>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>Moderator Mode:</strong> You are viewing reviews for "<strong>@ViewBag.BookName</strong>". 
+        You have the authority to delete offensive or inappropriate content.
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Rating</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var review in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@review.UserName</td>
+                            <td class="text-warning">
+                                @for (int i = 0; i < review.Rating; i++)
+                                {
+                                    <span>★</span>
+                                }
+                            </td>
+                            <td>@review.Content</td>
+                            <td>@review.CreatedAt.ToString("g")</td>
+                            <td>
+                                <form asp-action="DeleteReview" method="post" style="display:inline;">
+                                    <input type="hidden" name="reviewId" value="@review.ReviewId" />
+                                    <input type="hidden" name="bookId" value="@ViewBag.BookId" />
+                                    <button type="submit" class="btn btn-danger btn-sm" 
+                                            onclick="return confirm('⚠️ Are you sure you want to DELETE this review permanently?');">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <h4 class="text-muted">No reviews found for this book.</h4>
+            <p>Good job! Nothing to moderate here.</p>
+        </div>
+    }
+</div>
