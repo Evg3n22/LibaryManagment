@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MySqlConnector;
 using LibaryManagment.Models;
+using Microsoft.AspNetCore.Authorization; // Required for [AllowAnonymous]
 
 namespace LibaryManagment.Controllers;
 
@@ -16,13 +17,16 @@ public class LoginController : Controller
         _config = config;
     }
 
-    // GET
+    // GET: Login Page
+    [AllowAnonymous] // <--- Crucial: Guests must be able to access the login page!
     public IActionResult Login()
     {
         return View();
     }
 
+    // POST: Verify Credentials
     [HttpPost]
+    [AllowAnonymous] // <--- Crucial: Guests must be able to submit the login form
     public async Task<IActionResult> Verify(LoginModel usr)
     {
         // 🔹 1. Перевірка статичного адміна
@@ -57,7 +61,9 @@ public class LoginController : Controller
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usr.username),
+                    // Assigning "lib" for resource management
                     new Claim(ClaimTypes.Role, "lib"),
+                    // Assigning "moderator" for review management (Excellent implementation!)
                     new Claim(ClaimTypes.Role, "moderator")
                 };
 
@@ -86,7 +92,7 @@ public class LoginController : Controller
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, reader["StudentName"].ToString()),
-                    new Claim(ClaimTypes.Role, "user") // або reader["Role"].ToString()
+                    new Claim(ClaimTypes.Role, "Student") // Changed "user" to "Student" to match your Layout
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -102,5 +108,15 @@ public class LoginController : Controller
         // Якщо нікого не знайдено
         ViewBag.message = "Login Failed";
         return View("Login");
+    }
+    
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        // 1. Delete the cookie
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        // 2. Redirect to Home Page instead of Login Page
+        return RedirectToAction("Index", "Home");
     }
 }

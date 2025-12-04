@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using LibaryManagment.Models;
+using Microsoft.AspNetCore.Authorization; // Required for [AllowAnonymous]
 
 namespace LibaryManagment.Controllers;
 
@@ -13,11 +14,15 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    // GET: Home Page
+    [AllowAnonymous] // <--- Guests must be able to see the landing page
     public IActionResult Index()
     {
         return View();
     }
 
+    // GET: Privacy Page
+    [AllowAnonymous] // <--- Guests should be able to read privacy policy
     public IActionResult Privacy()
     {
         return View();

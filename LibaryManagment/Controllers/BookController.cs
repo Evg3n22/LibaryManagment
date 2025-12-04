@@ -14,123 +14,88 @@ namespace LibaryManagment.Controllers
         {
             _config = config;
         }
-        
-    // GET: Book Details
-    // public IActionResult Details(int id)
-    // {
-    //     BookModel book = new();
-    //     using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    //
-    //     var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
-    //                  b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
-    //                  b.BookDescription, b.CategoryID, b.BookImage,
-    //                  c.CategoryName
-    //           FROM Books b 
-    //           LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
-    //           WHERE b.BookId = @id";
-    //
-    //     var cmd = new MySqlCommand(query, con);
-    //     cmd.Parameters.AddWithValue("@id", id);
-    //     con.Open();
-    //
-    //     using var reader = cmd.ExecuteReader();
-    //     if (reader.Read())
-    //     {
-    //         book.BookId = Convert.ToInt32(reader["BookId"]);
-    //         book.BookName = reader["BookName"].ToString();
-    //         book.AuthorName = reader["AuthorName"].ToString();
-    //         book.AuthorID = Convert.ToInt32(reader["AuthorID"]);
-    //         book.CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]);
-    //         book.CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]);
-    //         book.Year = Convert.ToInt32(reader["Year"]);
-    //         book.Publisher = reader["Publisher"].ToString();
-    //         book.BookDescription = reader["BookDescription"].ToString();
-    //         book.CategoryID = Convert.ToInt32(reader["CategoryID"]);
-    //         book.CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized";
-    //         book.BookImage = reader["BookImage"] as byte[];
-    //     }
-    //     
-    //     
-    //
-    //     return View(book);
-    // }
-    //
-    
-    
-    public IActionResult Details(int id)
-{
-    BookModel book = new();
-    // Use a list to store reviews for this book
-    List<ReviewModel> reviews = new List<ReviewModel>();
 
-    using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    con.Open();
-
-    // Fetch Book Details
-    var query = @"SELECT b.*, c.CategoryName 
-                  FROM Books b 
-                  LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
-                  WHERE b.BookId = @id";
-
-    using (var cmd = new MySqlCommand(query, con))
-    {
-        cmd.Parameters.AddWithValue("@id", id);
-        using var reader = cmd.ExecuteReader();
-        if (reader.Read())
+        // ---------------------------------------------------------
+        // 1. PUBLIC ACTION: View Book Details (Allowed for Guests)
+        // ---------------------------------------------------------
+        [AllowAnonymous] // <--- This enables Unauthorized access
+        public IActionResult Details(int id)
         {
-            book.BookId = Convert.ToInt32(reader["BookId"]);
-            book.BookName = reader["BookName"].ToString();
-            book.AuthorName = reader["AuthorName"].ToString();
-            book.BookDescription = reader["BookDescription"].ToString();
-            book.Year = Convert.ToInt32(reader["Year"]);
-            book.Publisher = reader["Publisher"].ToString();
-            book.CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized";
-            book.CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]);
-            book.BookImage = reader["BookImage"] as byte[];
-        }
-    }
+            BookModel book = new();
+            List<ReviewModel> reviews = new List<ReviewModel>();
 
-    // Fetch Reviews for this book
-    var reviewQuery = "SELECT * FROM Reviews WHERE BookId = @id ORDER BY CreatedAt DESC";
-    using (var cmdReview = new MySqlCommand(reviewQuery, con))
-    {
-        cmdReview.Parameters.AddWithValue("@id", id);
-        using var reader = cmdReview.ExecuteReader();
-        while (reader.Read())
-        {
-            reviews.Add(new ReviewModel
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
+
+            // Fetch Book Details
+            var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
+                     b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
+                     b.BookDescription, b.CategoryID, b.BookImage,
+                     c.CategoryName
+              FROM Books b 
+              LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
+              WHERE b.BookId = @id";
+
+            using (var cmd = new MySqlCommand(query, con))
             {
-                ReviewId = Convert.ToInt32(reader["ReviewId"]),
-                UserName = reader["UserName"].ToString(),
-                Content = reader["Content"].ToString(),
-                Rating = Convert.ToInt32(reader["Rating"]),
-                CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
-            });
+                cmd.Parameters.AddWithValue("@id", id);
+                using var reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    book.BookId = Convert.ToInt32(reader["BookId"]);
+                    book.BookName = reader["BookName"].ToString();
+                    book.AuthorName = reader["AuthorName"].ToString();
+                    // book.AuthorID = Convert.ToInt32(reader["AuthorID"]); // Safe cast handled in reader
+                    book.AuthorID = reader["AuthorID"] != DBNull.Value ? Convert.ToInt32(reader["AuthorID"]) : 0;
+                    book.CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]);
+                    book.CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]);
+                    book.Year = reader["Year"] != DBNull.Value ? Convert.ToInt32(reader["Year"]) : 0;
+                    book.Publisher = reader["Publisher"].ToString();
+                    book.BookDescription = reader["BookDescription"].ToString();
+                    book.CategoryID = reader["CategoryID"] != DBNull.Value ? Convert.ToInt32(reader["CategoryID"]) : 0;
+                    book.CategoryName = reader["CategoryName"] != DBNull.Value ? reader["CategoryName"].ToString() : "Uncategorized";
+                    book.BookImage = reader["BookImage"] as byte[];
+                }
+            }
+
+            // Fetch Reviews for this book (Guests can read reviews)
+            var reviewQuery = "SELECT * FROM Reviews WHERE BookId = @id ORDER BY CreatedAt DESC";
+            using (var cmdReview = new MySqlCommand(reviewQuery, con))
+            {
+                cmdReview.Parameters.AddWithValue("@id", id);
+                using var reader = cmdReview.ExecuteReader();
+                while (reader.Read())
+                {
+                    reviews.Add(new ReviewModel
+                    {
+                        ReviewId = Convert.ToInt32(reader["ReviewId"]),
+                        UserName = reader["UserName"].ToString(),
+                        Content = reader["Content"].ToString(),
+                        Rating = Convert.ToInt32(reader["Rating"]),
+                        CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
+                    });
+                }
+            }
+
+            ViewBag.Reviews = reviews;
+            return View(book);
         }
-    }
 
-    // Pass reviews to the view via ViewBag
-    ViewBag.Reviews = reviews;
+        // ---------------------------------------------------------
+        // 2. PUBLIC ACTION: List Books (Allowed for Guests)
+        // ---------------------------------------------------------
+        [AllowAnonymous] // <--- This enables Unauthorized access
+        public async Task<IActionResult> Index(string searchTerm, int? categoryId, string availability, int? year)
+        {
+            var books = new List<BookModel>();
+            var categories = new List<dynamic>();
+            var years = new List<int>();
 
-    return View(book);
-}
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            await con.OpenAsync();
 
-    
-    
-    // GET: List of books with search and filters
-    public async Task<IActionResult> Index(string searchTerm, int? categoryId, string availability, int? year)
-{
-    var books = new List<BookModel>();
-    var categories = new List<dynamic>();
-    var years = new List<int>();
-
-    // 1. Use "Async" Task to free up server threads
-    // 2. Open the connection ONCE for all operations
-    using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    await con.OpenAsync();
-
-    // --- PART A: FETCH BOOKS ---
-    var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
+            // --- PART A: FETCH BOOKS ---
+            var query = @"SELECT b.BookId, b.BookName, b.AuthorName, b.AuthorID, 
                          b.CopiesAvailable, b.CopiesTotal, b.Year, b.Publisher, 
                          b.BookDescription, b.CategoryID, b.BookImage,
                          c.CategoryName
@@ -138,111 +103,106 @@ namespace LibaryManagment.Controllers
                   LEFT JOIN Categories c ON b.CategoryID = c.CategoryID 
                   WHERE 1=1";
 
-    var parameters = new List<MySqlParameter>();
+            var parameters = new List<MySqlParameter>();
 
-    // Logic for search prefixes refactored for cleaner reading
-    if (!string.IsNullOrEmpty(searchTerm))
-    {
-        searchTerm = searchTerm.Trim();
-        string columnToSearch = "b.BookName"; // Default
-        string cleanTerm = searchTerm;
-
-        if (searchTerm.StartsWith("author:", StringComparison.OrdinalIgnoreCase))
-        {
-            columnToSearch = "b.AuthorName";
-            cleanTerm = searchTerm.Substring(7).Trim();
-        }
-        else if (searchTerm.StartsWith("publisher:", StringComparison.OrdinalIgnoreCase))
-        {
-            columnToSearch = "b.Publisher";
-            cleanTerm = searchTerm.Substring(10).Trim();
-        }
-
-        query += $" AND {columnToSearch} LIKE @searchTerm";
-        parameters.Add(new MySqlParameter("@searchTerm", $"%{cleanTerm}%"));
-    }
-
-    if (categoryId.HasValue && categoryId.Value > 0)
-    {
-        query += " AND b.CategoryID = @categoryId";
-        parameters.Add(new MySqlParameter("@categoryId", categoryId.Value));
-    }
-
-    if (!string.IsNullOrEmpty(availability))
-    {
-         if (availability == "available") query += " AND b.CopiesAvailable > 0";
-         else if (availability == "unavailable") query += " AND b.CopiesAvailable = 0";
-    }
-
-    if (year.HasValue && year.Value > 0)
-    {
-        query += " AND b.Year = @year";
-        parameters.Add(new MySqlParameter("@year", year.Value));
-    }
-
-    using (var cmd = new MySqlCommand(query, con))
-    {
-        cmd.Parameters.AddRange(parameters.ToArray());
-        using var reader = await cmd.ExecuteReaderAsync();
-        while (await reader.ReadAsync())
-        {
-            books.Add(new BookModel
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                BookId = Convert.ToInt32(reader["BookId"]),
-                BookName = reader["BookName"].ToString(),
-                AuthorName = reader["AuthorName"].ToString(),
-                // Use checking for DBNull to prevent crashes on optional fields
-                AuthorID = reader["AuthorID"] != DBNull.Value ? Convert.ToInt32(reader["AuthorID"]) : 0,
-                CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]),
-                CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]),
-                Year = reader["Year"] != DBNull.Value ? Convert.ToInt32(reader["Year"]) : 0,
-                Publisher = reader["Publisher"].ToString(),
-                BookDescription = reader["BookDescription"].ToString(),
-                CategoryID = reader["CategoryID"] != DBNull.Value ? Convert.ToInt32(reader["CategoryID"]) : 0,
-                CategoryName = reader["CategoryName"]?.ToString() ?? "Uncategorized",
-                BookImage = reader["BookImage"] as byte[]
-            });
-        }
-    }
+                searchTerm = searchTerm.Trim();
+                string columnToSearch = "b.BookName"; 
+                string cleanTerm = searchTerm;
 
-    // --- PART B: FETCH CATEGORIES (Reusing 'con') ---
-    using (var cmdCat = new MySqlCommand("SELECT CategoryID, CategoryName FROM Categories ORDER BY CategoryName", con))
-    using (var readerCat = await cmdCat.ExecuteReaderAsync())
-    {
-        while (await readerCat.ReadAsync())
-        {
-            categories.Add(new
+                if (searchTerm.StartsWith("author:", StringComparison.OrdinalIgnoreCase))
+                {
+                    columnToSearch = "b.AuthorName";
+                    cleanTerm = searchTerm.Substring(7).Trim();
+                }
+                else if (searchTerm.StartsWith("publisher:", StringComparison.OrdinalIgnoreCase))
+                {
+                    columnToSearch = "b.Publisher";
+                    cleanTerm = searchTerm.Substring(10).Trim();
+                }
+
+                query += $" AND {columnToSearch} LIKE @searchTerm";
+                parameters.Add(new MySqlParameter("@searchTerm", $"%{cleanTerm}%"));
+            }
+
+            if (categoryId.HasValue && categoryId.Value > 0)
             {
-                CategoryID = Convert.ToInt32(readerCat["CategoryID"]),
-                CategoryName = readerCat["CategoryName"].ToString()
-            });
+                query += " AND b.CategoryID = @categoryId";
+                parameters.Add(new MySqlParameter("@categoryId", categoryId.Value));
+            }
+
+            if (!string.IsNullOrEmpty(availability))
+            {
+                if (availability == "available") query += " AND b.CopiesAvailable > 0";
+                else if (availability == "unavailable") query += " AND b.CopiesAvailable = 0";
+            }
+
+            if (year.HasValue && year.Value > 0)
+            {
+                query += " AND b.Year = @year";
+                parameters.Add(new MySqlParameter("@year", year.Value));
+            }
+
+            using (var cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddRange(parameters.ToArray());
+                using var reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    books.Add(new BookModel
+                    {
+                        BookId = Convert.ToInt32(reader["BookId"]),
+                        BookName = reader["BookName"].ToString(),
+                        AuthorName = reader["AuthorName"].ToString(),
+                        AuthorID = reader["AuthorID"] != DBNull.Value ? Convert.ToInt32(reader["AuthorID"]) : 0,
+                        CopiesAvailable = Convert.ToInt32(reader["CopiesAvailable"]),
+                        CopiesTotal = Convert.ToInt32(reader["CopiesTotal"]),
+                        Year = reader["Year"] != DBNull.Value ? Convert.ToInt32(reader["Year"]) : 0,
+                        Publisher = reader["Publisher"].ToString(),
+                        BookDescription = reader["BookDescription"].ToString(),
+                        CategoryID = reader["CategoryID"] != DBNull.Value ? Convert.ToInt32(reader["CategoryID"]) : 0,
+                        CategoryName = reader["CategoryName"]?.ToString() ?? "Uncategorized",
+                        BookImage = reader["BookImage"] as byte[]
+                    });
+                }
+            }
+
+            // --- PART B: FETCH CATEGORIES ---
+            using (var cmdCat = new MySqlCommand("SELECT CategoryID, CategoryName FROM Categories ORDER BY CategoryName", con))
+            using (var readerCat = await cmdCat.ExecuteReaderAsync())
+            {
+                while (await readerCat.ReadAsync())
+                {
+                    categories.Add(new
+                    {
+                        CategoryID = Convert.ToInt32(readerCat["CategoryID"]),
+                        CategoryName = readerCat["CategoryName"].ToString()
+                    });
+                }
+            }
+
+            // --- PART C: FETCH YEARS ---
+            using (var cmdYear = new MySqlCommand("SELECT DISTINCT Year FROM Books WHERE Year IS NOT NULL ORDER BY Year DESC", con))
+            using (var readerYear = await cmdYear.ExecuteReaderAsync())
+            {
+                while (await readerYear.ReadAsync())
+                {
+                    years.Add(Convert.ToInt32(readerYear["Year"]));
+                }
+            }
+
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.CategoryId = categoryId?.ToString();
+            ViewBag.Availability = availability;
+            ViewBag.Year = year?.ToString();
+            ViewBag.Categories = categories;
+            ViewBag.Years = years;
+
+            return View(books);
         }
-    }
 
-    // --- PART C: FETCH YEARS (Reusing 'con') ---
-    using (var cmdYear = new MySqlCommand("SELECT DISTINCT Year FROM Books WHERE Year IS NOT NULL ORDER BY Year DESC", con))
-    using (var readerYear = await cmdYear.ExecuteReaderAsync())
-    {
-        while (await readerYear.ReadAsync())
-        {
-            years.Add(Convert.ToInt32(readerYear["Year"]));
-        }
-    }
-
-    // Pass data to view
-    ViewBag.SearchTerm = searchTerm; // Keep original term so input box doesn't change
-    ViewBag.CategoryId = categoryId?.ToString();
-    ViewBag.Availability = availability;
-    ViewBag.Year = year?.ToString();
-    ViewBag.Categories = categories;
-    ViewBag.Years = years;
-
-    return View(books);
-}
-        
-        
-        
-        // GET: Create book
+        // GET: Create book (Protected)
         [Authorize(Roles = "admin,lib")]
         public IActionResult Create()
         {
@@ -262,9 +222,10 @@ namespace LibaryManagment.Controllers
             ViewBag.Authors = authors;
             return View();
         }
-        
-        // POST: Create book
+
+        // POST: Create book (Protected)
         [HttpPost]
+        [Authorize(Roles = "admin,lib")] // Added explicit authorize here too for safety
         public async Task<IActionResult> Create(BookModel model)
         {
             using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
@@ -274,7 +235,6 @@ namespace LibaryManagment.Controllers
             var authorName = getAuthorNameCmd.ExecuteScalar()?.ToString();
             model.AuthorName = authorName;
 
-            // Handle the uploaded image file
             if (model.ImageFile != null)
             {
                 using var memoryStream = new MemoryStream();
@@ -302,14 +262,12 @@ namespace LibaryManagment.Controllers
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-        
-        
-        // GET: Edit book
+
+        // GET: Edit book (Protected)
         [Authorize(Roles = "admin,lib")]
         public IActionResult Edit(int id)
         {
             BookModel book = new();
-            // First database connection for fetching the book details
             using (var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
                 var cmd = new MySqlCommand("SELECT * FROM Books WHERE BookId=@id", con);
@@ -332,7 +290,6 @@ namespace LibaryManagment.Controllers
                 }
             }
             
-            // Second, separate database connection for fetching the authors list
             var authors = new List<AuthorModel>();
             using (var con1 = new MySqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -351,12 +308,12 @@ namespace LibaryManagment.Controllers
             ViewBag.Authors = authors;
             return View(book);
         }
-        
-        // POST: Edit book
+
+        // POST: Edit book (Protected)
         [HttpPost]
+        [Authorize(Roles = "admin,lib")] // Added explicit authorize
         public async Task<IActionResult> Edit(BookModel model)
         {
-            // Handle the uploaded image file
             if (model.ImageFile != null)
             {
                 using var memoryStream = new MemoryStream();
@@ -373,7 +330,6 @@ namespace LibaryManagment.Controllers
                 CategoryID=@CategoryID, BookImage=@BookImage
                 WHERE BookId=@id", con);
 
-            // You also need to fetch the AuthorName here for the edit to work correctly
             var getAuthorNameCmd = new MySqlCommand("SELECT AuthorName FROM Author WHERE AuthorID = @AuthorID", con);
             getAuthorNameCmd.Parameters.AddWithValue("@AuthorID", model.AuthorID);
             con.Open();
@@ -396,7 +352,7 @@ namespace LibaryManagment.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Delete book
+        // GET: Delete book (Protected)
         [Authorize(Roles = "admin,lib")]
         public IActionResult Delete(int id)
         {
@@ -407,88 +363,81 @@ namespace LibaryManagment.Controllers
             cmd.ExecuteNonQuery();
             return RedirectToAction("Index");
         }
-        
+
+        // POST: Add Review (Protected - Must be logged in to review)
         [HttpPost]
-[Authorize]
-public IActionResult AddReview(int BookId, string Content, int Rating)
-{
-    using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    con.Open();
-
-    var query = @"INSERT INTO Reviews (BookId, UserName, Content, Rating, CreatedAt) 
-                  VALUES (@BookId, @UserName, @Content, @Rating, NOW())";
-
-    using var cmd = new MySqlCommand(query, con);
-    cmd.Parameters.AddWithValue("@BookId", BookId);
-    cmd.Parameters.AddWithValue("@UserName", User.Identity.Name ?? "Anonymous");
-    cmd.Parameters.AddWithValue("@Content", Content);
-    cmd.Parameters.AddWithValue("@Rating", Rating);
-
-    cmd.ExecuteNonQuery();
-
-    return RedirectToAction("Details", new { id = BookId });
-}
-
-// ---------------------------------------------------------
-// 3. ACTION: Moderator Panel (Only for Moderators)
-// ---------------------------------------------------------
-[Authorize(Roles = "moderator,admin")]
-public IActionResult Reviews(int id)
-{
-    var reviews = new List<ReviewModel>();
-    string bookName = "";
-
-    using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    con.Open();
-
-    // Get Book Name for display
-    var nameCmd = new MySqlCommand("SELECT BookName FROM Books WHERE BookId = @id", con);
-    nameCmd.Parameters.AddWithValue("@id", id);
-    bookName = nameCmd.ExecuteScalar()?.ToString();
-
-    // Get All Reviews
-    var query = "SELECT * FROM Reviews WHERE BookId = @id ORDER BY CreatedAt DESC";
-    using var cmd = new MySqlCommand(query, con);
-    cmd.Parameters.AddWithValue("@id", id);
-    
-    using var reader = cmd.ExecuteReader();
-    while (reader.Read())
-    {
-        reviews.Add(new ReviewModel
+        [Authorize] 
+        public IActionResult AddReview(int BookId, string Content, int Rating)
         {
-            ReviewId = Convert.ToInt32(reader["ReviewId"]),
-            BookId = id,
-            UserName = reader["UserName"].ToString(),
-            Content = reader["Content"].ToString(),
-            Rating = Convert.ToInt32(reader["Rating"]),
-            CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
-        });
-    }
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
 
-    ViewBag.BookName = bookName;
-    ViewBag.BookId = id;
-    return View(reviews);
-}
+            var query = @"INSERT INTO Reviews (BookId, UserName, Content, Rating, CreatedAt) 
+                        VALUES (@BookId, @UserName, @Content, @Rating, NOW())";
 
-// ---------------------------------------------------------
-// 4. ACTION: Delete Review (Only for Moderators)
-// ---------------------------------------------------------
-[HttpPost]
-[Authorize(Roles = "moderator,admin")]
-public IActionResult DeleteReview(int reviewId, int bookId)
-{
-    using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
-    con.Open();
+            using var cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@BookId", BookId);
+            cmd.Parameters.AddWithValue("@UserName", User.Identity.Name ?? "Anonymous");
+            cmd.Parameters.AddWithValue("@Content", Content);
+            cmd.Parameters.AddWithValue("@Rating", Rating);
 
-    var query = "DELETE FROM Reviews WHERE ReviewId = @id";
-    using var cmd = new MySqlCommand(query, con);
-    cmd.Parameters.AddWithValue("@id", reviewId);
-    
-    cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
 
-    // Redirect back to the moderator panel
-    return RedirectToAction("Reviews", new { id = bookId });
-}
+            return RedirectToAction("Details", new { id = BookId });
+        }
 
+        // GET: Moderator Panel (Protected - Moderators Only)
+        [Authorize(Roles = "moderator,admin")]
+        public IActionResult Reviews(int id)
+        {
+            var reviews = new List<ReviewModel>();
+            string bookName = "";
+
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
+
+            var nameCmd = new MySqlCommand("SELECT BookName FROM Books WHERE BookId = @id", con);
+            nameCmd.Parameters.AddWithValue("@id", id);
+            bookName = nameCmd.ExecuteScalar()?.ToString();
+
+            var query = "SELECT * FROM Reviews WHERE BookId = @id ORDER BY CreatedAt DESC";
+            using var cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                reviews.Add(new ReviewModel
+                {
+                    ReviewId = Convert.ToInt32(reader["ReviewId"]),
+                    BookId = id,
+                    UserName = reader["UserName"].ToString(),
+                    Content = reader["Content"].ToString(),
+                    Rating = Convert.ToInt32(reader["Rating"]),
+                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
+                });
+            }
+
+            ViewBag.BookName = bookName;
+            ViewBag.BookId = id;
+            return View(reviews);
+        }
+
+        // POST: Delete Review (Protected - Moderators Only)
+        [HttpPost]
+        [Authorize(Roles = "moderator,admin")]
+        public IActionResult DeleteReview(int reviewId, int bookId)
+        {
+            using var con = new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            con.Open();
+
+            var query = "DELETE FROM Reviews WHERE ReviewId = @id";
+            using var cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", reviewId);
+            
+            cmd.ExecuteNonQuery();
+
+            return RedirectToAction("Reviews", new { id = bookId });
+        }
     }
 }

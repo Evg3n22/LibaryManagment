@@ -39,20 +39,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Book/Index">Book</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Borrowing/Index">Borrowing</a>
-                        </li>
-                        
+                        @if (User.IsInRole("admin") || User.IsInRole("lib") || User.IsInRole(("Student")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/Borrowing/Index">Borrowing</a>
+                            </li>
+                        }
                         @if (User.IsInRole("admin") || User.IsInRole("lib"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="/Librarian/Index">Librarian</a>
                             </li>
                         }
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Login">Logout</a>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated) 
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                        } 
+                        else 
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout (@User.Identity.Name)</a>
+                            </li>
+                        }
+                        
                     </ul>
                 </div>
             </div>

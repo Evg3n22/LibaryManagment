@@ -27,7 +27,7 @@ namespace LibraryManagement.Controllers
             {
                 cmd = new MySqlCommand("SELECT * FROM Borrowings", con);
             }
-            else if (User.IsInRole("user"))
+            else if (User.IsInRole("Student"))
             {
                 cmd = new MySqlCommand("SELECT * FROM Borrowings WHERE StudentName = @studentName", con);
                 cmd.Parameters.AddWithValue("@studentName", User.Identity.Name); 
@@ -53,7 +53,7 @@ namespace LibraryManagement.Controllers
             } // Reader is closed here
 
             // Now we can execute another query on the same connection
-            if (User.IsInRole("user"))
+            if (User.IsInRole("Student"))
             {
                 List<QueueModel> userQueue = new();
                 var queueCmd = new MySqlCommand(
