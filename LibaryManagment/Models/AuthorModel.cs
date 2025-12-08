@@ -1,12 +1,26 @@
-namespace LibaryManagment.Models;
+using System.ComponentModel.DataAnnotations; // Required for validation
 
-public class AuthorModel
+namespace LibaryManagment.Models
 {
-    public int AuthorID { get; set; }
-    public string AuthorName { get; set; }
-    public int BirthYear { get; set; }
-    public string Country { get; set; }
-    public string AuthorDescription { get; set; }
-    public IFormFile? ImageFile { get; set; }
-    public byte[] AuthorImage { get; set; }
+    public class AuthorModel
+    {
+        public int AuthorID { get; set; }
+
+        [Required(ErrorMessage = "Author Name is required")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 100 characters")]
+        public string AuthorName { get; set; }
+
+        [Range(1000, 2100, ErrorMessage = "Please enter a valid birth year")]
+        public int BirthYear { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Country name is too long")]
+        public string Country { get; set; }
+
+        [StringLength(1000)]
+        public string AuthorDescription { get; set; }
+
+        public IFormFile? ImageFile { get; set; }
+        public byte[]? AuthorImage { get; set; }
+    }
 }

@@ -1,43 +1,49 @@
-@model LibaryManagment.Models.StudentModel;
-
+@model LibaryManagment.Models.StudentModel
 
 @{
     ViewData["Title"] = "Add Student";
 }
-<h2>Add Student</h2>
 
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        <label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Phone</label>
-        <input asp-for="Phone" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label for="Password">Password</label>
-        <input type="password" class="form-control" asp-for="Password" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="container mt-4">
+    <h2>Add Student</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post">
+                
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<script>
-    function validateForm(){
-        const studentname = document.querySelector('[name="StudentName"]').value.trim();
-        const email = document.querySelector('[name="Email"]').value.trim();
-        const phone = document.querySelector('[name="Phone"]').value.trim();
+                <div class="mb-3">
+                    <label asp-for="StudentName" class="form-label">Student Name</label>
+                    <input asp-for="StudentName" class="form-control" />
+                    <span asp-validation-for="StudentName" class="text-danger"></span>
+                </div>
 
-        if (!studentname || !email || !phone) {
-            alert("All fields are required: StudentName, Email, and Phone.");
-            return false; // prevent form submission
-        }
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-        return true; //aloww submission
-    }
-</script>
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label">Phone</label>
+                    <input asp-for="Phone" class="form-control" type="tel" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">Add</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,47 +1,49 @@
 @model LibaryManagment.Models.LibrarianModel
+
 @{
     ViewData["Title"] = "Add Librarian";
 }
-<h2>Add Librarian</h2>
 
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        <label>Name</label>
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Age</label>
-        <input asp-for="Age" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Phone</label>
-        <input asp-for="Phone" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label for="Password">Password</label>
-        <input type="password" class="form-control" asp-for="Password" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="container mt-4">
+    <h2>Add Librarian</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post">
+                
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-@if(ViewBag.Errors != null)
-{
-    <div class="alert alert-danger">@ViewBag.Errors</div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Age" class="form-label">Age</label>
+                    <input asp-for="Age" class="form-control" type="number" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label">Phone</label>
+                    <input asp-for="Phone" class="form-control" type="tel" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">Add</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-
-<script>
-    function validateForm() {
-        const name = document.querySelector('[name="Name"]').value.trim();
-        const age = document.querySelector('[name="Age"]').value.trim();
-        const phone = document.querySelector('[name="Phone"]').value.trim();
-
-        if (!name || !age || !phone) {
-            alert("All fields are required: Name, Age, Phone.");
-            return false; // prevent form submission
-        }
-
-        return true; // allow submission
-    }
-</script>
