@@ -1,27 +1,32 @@
 @model LibaryManagment.Models.StudentModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
+
 @{
-    ViewData["Title"] = "Edit StudentModel";
+    ViewData["Title"] = Localizer["Student_Edit_Title"];
 }
-<h2>Edit Student</h2>
+
+<h2>@Localizer["Student_Edit_Title"]</h2>
 
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="StudentId" />
     <div class="mb-3">
-        <label>StudentName</label>
+        <label class="form-label">@Localizer["Student_Label_Name"]</label>
         <input asp-for="StudentName" class="form-control" />
     </div>
     <div class="mb-3">
-        <label>Email</label>
+        <label class="form-label">@Localizer["Student_Label_Email"]</label>
         <input asp-for="Email" class="form-control" />
     </div>
     <div class="mb-3">
-        <label>Phone</label>
+        <label class="form-label">@Localizer["Student_Label_Phone"]</label>
         <input asp-for="Phone" class="form-control" />
     </div>
     <div class="mb-3">
-        <label for="Password">Password</label>
+        <label for="Password" class="form-label">@Localizer["Student_Label_Password"]</label>
         <input type="password" class="form-control" asp-for="Password" />
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">@Localizer["Global_Btn_Update"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@Localizer["Global_Btn_Cancel"]</a>
 </form>

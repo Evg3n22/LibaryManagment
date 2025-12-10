@@ -1,37 +1,25 @@
 @model List<LibaryManagment.Models.BookModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = Localizer["Book_Index_TabTitle"];
 }
 
-<!doctype html>
-<html lang="en">
-
-<body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Library Management</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/BookIndex.css">
-</head>
-
-
+<link rel="stylesheet" href="/css/BookIndex.css">
 
 <div class="container-fluid px-4">
     <div class="books-header">
-        <h1 class="page-title">📚 Library Books</h1>
+        <h1 class="page-title">📚 @Localizer["Book_Index_Title"]</h1>
         @if (User.IsInRole("admin") || User.IsInRole("lib"))
         {
             <a class="btn btn-primary btn-lg" href="/Book/Create">
-                ➕ Add New Book
+                ➕ @Localizer["Book_Index_Btn_Add"]
             </a>
         }
     </div>
 
-    <!-- Search and Filter Section -->
     <div class="search-filter-section">
         <form method="get" asp-action="Index">
             <div class="search-bar">
@@ -41,17 +29,17 @@
                     <input type="text" 
                            name="searchTerm" 
                            class="search-input" 
-                           placeholder="Search book title (use author: or publisher: for specific search)..."
+                           placeholder="@Localizer["Book_Search_Placeholder"]"
                            value="@ViewBag.SearchTerm" 
-                           title="Приклади: 'Harry Potter', 'author:Tolkien', 'publisher:Penguin'" />
+                           title="@Localizer["Book_Search_Tooltip"]" />
                 </div>
             </div>
             
             <div class="filter-group">
                 <div class="filter-item">
-                    <label class="filter-label">Category</label>
+                    <label class="filter-label">@Localizer["Book_Filter_Label_Category"]</label>
                     <select name="categoryId" class="filter-select">
-                        <option value="">All Categories</option>
+                        <option value="">@Localizer["Book_Filter_Option_AllCategories"]</option>
                         @if (ViewBag.Categories != null)
                         {
                             @foreach (var category in ViewBag.Categories)
@@ -66,18 +54,18 @@
                 </div>
                 
                 <div class="filter-item">
-                    <label class="filter-label">Availability</label>
+                    <label class="filter-label">@Localizer["Book_Filter_Label_Availability"]</label>
                     <select name="availability" class="filter-select">
-                        <option value="">All Books</option>
-                        <option value="available" selected="@(ViewBag.Availability == "available")">Available Only</option>
-                        <option value="unavailable" selected="@(ViewBag.Availability == "unavailable")">Unavailable Only</option>
+                        <option value="">@Localizer["Book_Filter_Option_AllBooks"]</option>
+                        <option value="available" selected="@(ViewBag.Availability == "available")">@Localizer["Book_Filter_Option_Available"]</option>
+                        <option value="unavailable" selected="@(ViewBag.Availability == "unavailable")">@Localizer["Book_Filter_Option_Unavailable"]</option>
                     </select>
                 </div>
                 
                 <div class="filter-item">
-                    <label class="filter-label">Year</label>
+                    <label class="filter-label">@Localizer["Book_Filter_Label_Year"]</label>
                     <select name="year" class="filter-select">
-                        <option value="">All Years</option>
+                        <option value="">@Localizer["Book_Filter_Option_AllYears"]</option>
                         @if (ViewBag.Years != null)
                         {
                             @foreach (var year in ViewBag.Years)
@@ -90,24 +78,22 @@
                 
                 <div class="filter-buttons">
                     <button type="submit" class="btn-filter btn-apply-filter">
-                        🔎 Apply Filters
+                        🔎 @Localizer["Book_Filter_Btn_Apply"]
                     </button>
                     <a href="@Url.Action("Index")" class="btn-filter btn-clear-filter">
-                        ✖️ Clear
+                        ✖️ @Localizer["Book_Filter_Btn_Clear"]
                     </a>
                 </div>
             </div>
         </form>
     </div>
 
-    <!-- Results Info -->
     <div class="results-info">
         <span class="results-count">
-            Showing @Model.Count @(Model.Count == 1 ? "book" : "books")
+            @Localizer["Book_Index_ResultsCount", Model.Count]
         </span>
     </div>
 
-    <!-- Books Grid -->
     @if (Model.Any())
     {
         <div class="books-grid">
@@ -128,11 +114,11 @@
                     
                     <div class="book-card-body">
                         <h3 class="book-title">@item.BookName</h3>
-                        <p class="book-author">by @item.AuthorName</p>
+                        <p class="book-author">@Localizer["Book_Card_ByAuthor", item.AuthorName]</p>
                         
                         <div class="availability-badge @(item.CopiesAvailable > 0 ? "available" : "unavailable")">
                             <span>@(item.CopiesAvailable > 0 ? "✓" : "✗")</span>
-                            <span>@item.CopiesAvailable / @item.CopiesTotal Available</span>
+                            <span>@Localizer["Book_Status_AvailableCount", item.CopiesAvailable, item.CopiesTotal]</span>
                         </div>
                         
                         @if (!string.IsNullOrEmpty(item.BookDescription))
@@ -142,54 +128,47 @@
                         
                         <div class="book-details">
                             <div class="book-detail-item">
-                                <span class="book-detail-label">Year</span>
+                                <span class="book-detail-label">@Localizer["Book_Table_Header_Year"]</span>
                                 <span class="book-detail-value">@item.Year</span>
                             </div>
                             <div class="book-detail-item">
-                                <span class="book-detail-label">Publisher</span>
+                                <span class="book-detail-label">@Localizer["Book_Table_Header_Publisher"]</span>
                                 <span class="book-detail-value">@item.Publisher</span>
                             </div>
                             <div class="book-detail-item">
-                                <span class="book-detail-label">Category</span>
+                                <span class="book-detail-label">@Localizer["Book_Filter_Label_Category"]</span>
                                 <span class="book-detail-value">@item.CategoryName</span>
                             </div>
                             <div class="book-detail-item">
-                                <span class="book-detail-label">Book ID</span>
+                                <span class="book-detail-label">@Localizer["Book_Card_Label_ID"]</span>
                                 <span class="book-detail-value">#@item.BookId</span>
                             </div>
                         </div>
                         
                         
                         <div class="card-footer">
-                            <!-- Visible to Everyone -->
                             <a asp-action="Details" asp-route-id="@item.BookId" class="btn btn-info btn-sm">
-                                <i class="fas fa-eye"></i> View Details
+                                <i class="fas fa-eye"></i> @Localizer["Global_Btn_ViewDetails"]
                             </a>
 
-                            <!-- RESOURCE ADMINISTRATOR: Can Edit/Delete (Req #3) -->
                             @if (User.IsInRole("admin") || User.IsInRole("lib"))
                             {
                                 <a asp-action="Edit" asp-route-id="@item.BookId" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
+                                    <i class="fas fa-edit"></i> @Localizer["Global_Btn_Edit"]
                                 </a>
                                 <a asp-action="Delete" asp-route-id="@item.BookId" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Are you sure you want to delete this book?')">
-                                    <i class="fas fa-trash"></i> Delete
+                                   onclick="return confirm('@Localizer["Book_Confirm_Delete"]')">
+                                    <i class="fas fa-trash"></i> @Localizer["Global_Btn_Delete"]
                                 </a>
                             }
 
-                            <!-- MODERATOR: Can Review Comments (Req #4) -->
-                            <!-- This checks for the specific "moderator" claim we added in LoginController -->
                             @if (User.IsInRole("moderator") || User.IsInRole("admin"))
                             {
-                                <!-- Add a small margin-top to separate it from the edit buttons on mobile -->
                                 <a asp-action="Reviews" asp-route-id="@item.BookId" class="btn btn-dark btn-sm mt-1">
-                                    <i class="fas fa-gavel"></i> Moderate Reviews
+                                    <i class="fas fa-gavel"></i> @Localizer["Global_Btn_Moderate"]
                                 </a>
                             }
                         </div>
-                        
-                        
                     </div>
                 </div>
             }
@@ -199,11 +178,8 @@
     {
         <div class="no-results">
             <div class="no-results-icon">🔍</div>
-            <div class="no-results-text">No books found matching your search criteria</div>
-            <p>Try adjusting your filters or search terms</p>
+            <div class="no-results-text">@Localizer["Book_Empty_Title"]</div>
+            <p>@Localizer["Book_Empty_Text"]</p>
         </div>
     }
 </div>
-
-</body>
-</html>

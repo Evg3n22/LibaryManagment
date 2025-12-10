@@ -1,29 +1,32 @@
 @model List<LibaryManagment.Models.AuthorModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Authors";
+    ViewData["Title"] = Localizer["Author_Index_Title"];
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Authors</h2>
+        <h2>@Localizer["Author_Index_Title"]</h2>
         @if (User.IsInRole("admin") || User.IsInRole("lib"))
         {
-            <a asp-action="Create" class="btn btn-primary">Add New Author</a>
+            <a asp-action="Create" class="btn btn-primary">@Localizer["Author_Index_Btn_Add"]</a>
         }
     </div>
 
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Image</th>
-                <th>Author Name</th>
-                <th>Birth Year</th>
-                <th>Country</th>
-                <th>Description</th>
+                <th>@Localizer["Author_Table_Header_Image"]</th>
+                <th>@Localizer["Author_Table_Header_Name"]</th>
+                <th>@Localizer["Author_Table_Header_BirthYear"]</th>
+                <th>@Localizer["Author_Table_Header_Country"]</th>
+                <th>@Localizer["Author_Table_Header_Description"]</th>
                 @if (User.IsInRole("admin") || User.IsInRole("lib"))
                 {
-                    <th>Actions</th>
+                    <th>@Localizer["Author_Table_Header_Actions"]</th>
                 }
             </tr>
         </thead>
@@ -41,7 +44,7 @@
                         else
                         {
                             <div style="width: 50px; height: 50px; background-color: #ddd; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
-                                <span>No Image</span>
+                                <span style="font-size: 10px; text-align: center;">@Localizer["Author_Image_Placeholder"]</span>
                             </div>
                         }
                     </td>
@@ -53,10 +56,10 @@
                     <td>
                     @if (User.IsInRole("admin") || User.IsInRole("lib"))
                     {
-                        <a asp-action="Edit" asp-route-id="@author.AuthorID" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@author.AuthorID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this author?');">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@author.AuthorID" class="btn btn-sm btn-warning">@Localizer["Global_Btn_Edit"]</a>
+                        <a asp-action="Delete" asp-route-id="@author.AuthorID" class="btn btn-sm btn-danger" onclick="return confirm('@Localizer["Author_Confirm_Delete"]');">@Localizer["Global_Btn_Delete"]</a>
                     }
-                        <a asp-action="Details"  asp-route-id="@author.AuthorID" class="btn btn-info btn-sm">View Details</a>
+                        <a asp-action="Details"  asp-route-id="@author.AuthorID" class="btn btn-info btn-sm">@Localizer["Global_Btn_ViewDetails"]</a>
                         </td>
                     
                 </tr>

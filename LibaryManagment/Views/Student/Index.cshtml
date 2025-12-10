@@ -1,37 +1,39 @@
 @model List<LibaryManagment.Models.StudentModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Students";
+    ViewData["Title"] = Localizer["Student_Index_Title"];
 }
 
-<a class="btn btn-primary mt-3 ms-2" href="/Student/Create">Add New Student</a>
+<a class="btn btn-primary mt-3 ms-2" href="/Student/Create">@Localizer["Student_Index_Btn_Add"]</a>
 
 <table class="table table-bordered mt-3">
     <thead>
     <tr>
-        <th>StudentID</th> <!-- Add this line -->
-        <th>StudentName</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Actions</th>
+        <th>@Localizer["Student_Table_Header_Id"]</th>
+        <th>@Localizer["Student_Table_Header_Name"]</th>
+        <th>@Localizer["Student_Table_Header_Email"]</th>
+        <th>@Localizer["Student_Table_Header_Phone"]</th>
+        <th>@Localizer["Student_Table_Header_Actions"]</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.StudentId</td> <!-- Add this line -->
+            <td>@item.StudentId</td>
             <td>@item.StudentName</td>
             <td>@item.Email</td>
             <td>@item.Phone</td>
             @if (User.IsInRole("admin") || User.IsInRole("lib"))
             {
                 <td>
-                    <a class="btn btn-warning btn-sm" href="/Student/Edit/@item.StudentId">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Student/Delete/@item.StudentId" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-warning btn-sm" href="/Student/Edit/@item.StudentId">@Localizer["Global_Btn_Edit"]</a>
+                    <a class="btn btn-danger btn-sm" href="/Student/Delete/@item.StudentId" onclick="return confirm('@Localizer["Global_Confirm_Delete"]')">@Localizer["Global_Btn_Delete"]</a>
                 </td>
             }
-            
         </tr>
     }
     </tbody>

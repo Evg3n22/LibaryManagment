@@ -1,18 +1,20 @@
 @model List<LibaryManagment.Models.ReviewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Moderation Panel";
+    ViewData["Title"] = Localizer["Review_Mod_Title"];
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>🛡️ Moderation Panel</h2>
-        <a href="/Book/Index" class="btn btn-outline-secondary">Back to Books</a>
+        <h2>🛡️ @Localizer["Review_Mod_Header"]</h2>
+        <a href="/Book/Index" class="btn btn-outline-secondary">@Localizer["Review_Mod_Btn_Back"]</a>
     </div>
 
     <div class="alert alert-warning">
-        <strong>Moderator Mode:</strong> You are viewing reviews for "<strong>@ViewBag.BookName</strong>". 
-        You have the authority to delete offensive or inappropriate content.
+        <strong>@Localizer["Review_Mod_Alert_Label"]</strong> @Localizer["Review_Mod_Alert_Body", ViewBag.BookName]
     </div>
 
     @if (Model.Any())
@@ -21,11 +23,11 @@
             <table class="table table-hover table-bordered bg-white">
                 <thead class="table-dark">
                     <tr>
-                        <th>User</th>
-                        <th>Rating</th>
-                        <th>Content</th>
-                        <th>Date</th>
-                        <th>Action</th>
+                        <th>@Localizer["Review_Table_User"]</th>
+                        <th>@Localizer["Review_Label_Rating"]</th>
+                        <th>@Localizer["Review_Table_Content"]</th>
+                        <th>@Localizer["Review_Table_Date"]</th>
+                        <th>@Localizer["Book_Table_Header_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +48,8 @@
                                     <input type="hidden" name="reviewId" value="@review.ReviewId" />
                                     <input type="hidden" name="bookId" value="@ViewBag.BookId" />
                                     <button type="submit" class="btn btn-danger btn-sm" 
-                                            onclick="return confirm('⚠️ Are you sure you want to DELETE this review permanently?');">
-                                        <i class="fas fa-trash-alt"></i> Delete
+                                            onclick="return confirm('@Localizer["Review_Confirm_Delete"]');">
+                                        <i class="fas fa-trash-alt"></i> @Localizer["Global_Btn_Delete"]
                                     </button>
                                 </form>
                             </td>
@@ -60,8 +62,8 @@
     else
     {
         <div class="text-center py-5">
-            <h4 class="text-muted">No reviews found for this book.</h4>
-            <p>Good job! Nothing to moderate here.</p>
+            <h4 class="text-muted">@Localizer["Review_Mod_Empty_Title"]</h4>
+            <p>@Localizer["Review_Mod_Empty_Desc"]</p>
         </div>
     }
 </div>

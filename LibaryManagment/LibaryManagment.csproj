@@ -25,4 +25,12 @@
       <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="SharedResource.resx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\" />
+    </ItemGroup>
+
 </Project>

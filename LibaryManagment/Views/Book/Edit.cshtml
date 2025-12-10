@@ -1,61 +1,65 @@
 @model LibaryManagment.Models.BookModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Edit Book";
+    ViewData["Title"] = Localizer["Book_Edit_Title"];
 }
 
-<h2>Edit Book</h2>
+<h2>@Localizer["Book_Edit_Title"]</h2>
 
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="BookId" />
 
     <div class="mb-3">
-        <label>Book Name</label>
+        <label class="form-label">@Localizer["Book_Label_Title"]</label>
         <input asp-for="BookName" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label>Author</label>
+        <label class="form-label">@Localizer["Book_Label_Author"]</label>
         <select asp-for="AuthorID" class="form-control" asp-items="@(new SelectList(ViewBag.Authors, "AuthorID", "AuthorName", Model.AuthorID))">
-            <option value="">-- Select Author --</option>
+            <option value="">@Localizer["Book_Select_DefaultAuthor"]</option>
         </select>
     </div>
 
     <div class="mb-3">
-        <label>Copies Available</label>
+        <label class="form-label">@Localizer["Book_Label_CopiesAvailable"]</label>
         <input asp-for="CopiesAvailable" class="form-control" type="number" />
     </div>
 
     <div class="mb-3">
-        <label>Copies Total</label>
+        <label class="form-label">@Localizer["Book_Label_CopiesTotal"]</label>
         <input asp-for="CopiesTotal" class="form-control" type="number" />
     </div>
 
     <div class="mb-3">
-        <label>Year</label>
+        <label class="form-label">@Localizer["Book_Label_Year"]</label>
         <input asp-for="Year" class="form-control" type="number" />
     </div>
 
     <div class="mb-3">
-        <label>Publisher</label>
+        <label class="form-label">@Localizer["Book_Label_Publisher"]</label>
         <input asp-for="Publisher" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label>Description</label>
+        <label class="form-label">@Localizer["Book_Label_Description"]</label>
         <textarea asp-for="BookDescription" class="form-control"></textarea>
     </div>
 
     <div class="mb-3">
-        <label>Category ID</label>
+        <label class="form-label">@Localizer["Book_Label_CategoryID"]</label>
         <input asp-for="CategoryID" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label>Book Image</label>
+        <label class="form-label">@Localizer["Book_Label_Image"]</label>
         <input asp-for="ImageFile" type="file" class="form-control" />
+        <small class="form-text text-muted">@Localizer["Global_Help_KeepImage"]</small>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">@Localizer["Global_Btn_Update"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@Localizer["Global_Btn_Cancel"]</a>
 </form>

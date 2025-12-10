@@ -1,9 +1,12 @@
 @model LibaryManagment.Models.BorrowingModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 <!DOCTYPE html>
-<html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
-    <title>Issue Book</title>
+    <title>@Localizer["Borrowing_Create_Title"]</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .available {
@@ -25,16 +28,16 @@
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="bi bi-book"></i> Issue Book to Student</h3>
+                    <h3 class="mb-0"><i class="bi bi-book"></i> @Localizer["Borrowing_Create_Header"]</h3>
                 </div>
                 <div class="card-body">
                     <form asp-action="Create" method="post">
                         <div class="mb-4">
                             <label for="StudentName" class="form-label fw-bold">
-                                <i class="bi bi-person"></i> Student
+                                <i class="bi bi-person"></i> @Localizer["Borrowing_Table_Header_Student"]
                             </label>
                             <select asp-for="StudentName" class="form-select form-select-lg" required>
-                                <option value="">-- Select a student --</option>
+                                <option value="">@Localizer["Borrowing_Select_DefaultStudent"]</option>
                                 @foreach (var student in ViewBag.Students)
                                 {
                                 <option value="@student">@student</option>
@@ -44,10 +47,10 @@
 
                         <div class="mb-4">
                             <label for="BookName" class="form-label fw-bold">
-                                <i class="bi bi-journal-bookmark"></i> Book
+                                <i class="bi bi-journal-bookmark"></i> @Localizer["Borrowing_Table_Header_Book"]
                             </label>
                             <select asp-for="BookName" class="form-select form-select-lg" id="bookSelect" required>
-                                <option value="">-- Select a book --</option>
+                                <option value="">@Localizer["Borrowing_Select_DefaultBook"]</option>
                                 @foreach (var book in ViewBag.Books)
                                 {
                                 int available = ViewBag.BookAvailability[book];
@@ -55,14 +58,14 @@
                                 {
                                 <option value="@book" class="book-option">
                                     @book
-                                    <span class="available">(✓ Available: @available copies)</span>
+                                    <span class="available">@Localizer["Borrowing_Option_Available", available]</span>
                                 </option>
                                 }
                                 else
                                 {
                                 <option value="@book" class="book-option">
                                     @book
-                                    <span class="unavailable">(⏳ Not available - will be added to the queue)</span>
+                                    <span class="unavailable">@Localizer["Borrowing_Option_Queue"]</span>
                                 </option>
                                 }
                                 }
@@ -72,15 +75,16 @@
 
                         <div class="alert alert-info">
                             <i class="bi bi-info-circle"></i>
-                            <strong>Note:</strong> If a book is not available, the student will automatically be added to the waiting queue.
+                            <strong>@Localizer["Borrowing_Note_Label"]</strong>
+                            @Localizer["Borrowing_Note_Body"]
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a asp-action="Index" class="btn btn-secondary btn-lg">
-                                <i class="bi bi-arrow-left"></i> Cancel
+                                <i class="bi bi-arrow-left"></i> @Localizer["Global_Btn_Cancel"]
                             </a>
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-check-circle"></i> Issue / Add to Queue
+                                <i class="bi bi-check-circle"></i> @Localizer["Borrowing_Btn_IssueOrQueue"]
                             </button>
                         </div>
                     </form>
@@ -98,12 +102,21 @@
         var selectedOption = this.options[this.selectedIndex];
         var bookInfo = document.getElementById('bookInfo');
 
+        // Отримуємо перекладені тексти з Razor
+        var msgAvailable = '@Localizer["Borrowing_JS_Available"]';
+        var msgQueue = '@Localizer["Borrowing_JS_Queue"]';
+
+        // Ключові слова для пошуку (мають збігатися з перекладом у .resx)
+        var keywordAvailable = '@Localizer["Borrowing_JS_Keyword_Available"]';
+        var keywordQueue = '@Localizer["Borrowing_JS_Keyword_Queue"]';
+
         if (selectedOption.value) {
             var text = selectedOption.text;
-            if (text.includes('Available')) {
-                bookInfo.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle"></i> The book can be issued now!</div>';
-            } else if (text.includes('Not available')) {
-                bookInfo.innerHTML = '<div class="alert alert-warning"><i class="bi bi-clock-history"></i> The student will be added to the waiting queue.</div>';
+            // Перевіряємо, чи містить текст опції ключове слово поточною мовою
+            if (text.includes(keywordAvailable)) {
+                bookInfo.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle"></i> ' + msgAvailable + '</div>';
+            } else if (text.includes(keywordQueue)) {
+                bookInfo.innerHTML = '<div class="alert alert-warning"><i class="bi bi-clock-history"></i> ' + msgQueue + '</div>';
             }
         } else {
             bookInfo.innerHTML = '';

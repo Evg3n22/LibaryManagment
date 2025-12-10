@@ -1,18 +1,20 @@
-@model LibaryManagment.Models.LoginModel;
+@model LibaryManagment.Models.LoginModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Library Management</title>
+    <title>@Localizer["Login_PageTitle"]</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
@@ -22,81 +24,74 @@
                 <div class="login-icon">
                     <i class="fas fa-user-shield"></i>
                 </div>
-                <h1 class="login-title">Login</h1>
-                <p class="login-subtitle">Увійдіть до системи управління бібліотекою</p>
+                <h1 class="login-title">@Localizer["Login_Title"]</h1>
+                <p class="login-subtitle">@Localizer["Login_Subtitle"]</p>
             </div>
 
-            <!-- This form preserves the original ASP.NET MVC structure -->
             <form method="POST" action="/Login/Verify" id="loginForm">
                 <div class="form-group has-icon">
-                    <label for="username" class="form-label">Username:</label>
+                    <label for="username" class="form-label">@Localizer["Login_Label_Username"]:</label>
                     <div style="position: relative;">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Введіть ваш username" required>
+                        <input type="text" class="form-control" id="username" name="username" 
+                               placeholder="@Localizer["Login_Placeholder_Username"]" required>
                         <i class="fas fa-user input-icon"></i>
                     </div>
                 </div>
 
                 <div class="form-group has-icon">
-                    <label for="password" class="form-label">Password:</label>
+                    <label for="password" class="form-label">@Localizer["Login_Label_Password"]:</label>
                     <div style="position: relative;">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Введіть ваш пароль" required>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               placeholder="@Localizer["Login_Placeholder_Password"]" required>
                         <i class="fas fa-lock input-icon"></i>
                     </div>
                 </div>
 
-                @* <div class="remember-forgot"> *@
-                @*     <div class="form-check"> *@
-                @*         <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me"> *@
-                @*         <label class="form-check-label" for="remember-me"> *@
-                @*             Запам'ятати мене *@
-                @*         </label> *@
-                @*     </div> *@
-                @*     <a href="#" class="forgot-link">Забули пароль?</a> *@
-                @* </div> *@
-
                 <button type="submit" class="submit-btn mt-2" name="Submit">
                     <i class="fas fa-sign-in-alt me-2"></i>
-                    Увійти
+                    @Localizer["Login_Button_Submit"]
                 </button>
 
-                <!-- Error message placeholder -->
                 <div id="errorMessage" class="error-message" style="display: none;">
-                    <!-- ViewBag.message would be displayed here -->
+                    @if (ViewBag.Message != null)
+                    {
+                        @ViewBag.Message
+                    }
                 </div>
             </form>
 
             <div class="footer-text">
-                © 2025 Library Management System
+                @Localizer["Login_Footer"]
             </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Simple form handling
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('loginForm');
             const submitBtn = document.querySelector('.submit-btn');
             
+            // Зберігаємо локалізовані рядки у змінні JS
+            const textLoggingIn = '@Localizer["Login_JS_LoggingIn"]';
+            const textLogin = '@Localizer["Login_Button_Submit"]';
+
             form.addEventListener('submit', function(e) {
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Входимо...';
+                // Використовуємо локалізований текст
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>' + textLoggingIn;
                 submitBtn.disabled = true;
                 
-                // Re-enable button after 3 seconds as fallback
                 setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Увійти';
+                    submitBtn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>' + textLogin;
                     submitBtn.disabled = false;
                 }, 3000);
             });
             
-            // Simple error message display function
             function showErrorMessage(message) {
                 const errorDiv = document.getElementById('errorMessage');
                 errorDiv.textContent = message;
                 errorDiv.style.display = 'block';
             }
-            
-            // Example usage: showErrorMessage('Невірний логін або пароль');
         });
     </script>
 </body>

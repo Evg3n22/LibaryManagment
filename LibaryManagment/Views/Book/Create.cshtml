@@ -1,11 +1,14 @@
 @model LibaryManagment.Models.BookModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Create Book";
+    ViewData["Title"] = Localizer["Book_Create_Title"];
 }
 
 <div class="container mt-4">
-    <h2>Create New Book</h2>
+    <h2>@Localizer["Book_Create_Header"]</h2>
     <hr />
 
     <div class="row">
@@ -15,64 +18,64 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 <div class="mb-3">
-                    <label asp-for="BookName" class="form-label">Book Name</label>
-                    <input asp-for="BookName" class="form-control" placeholder="Enter book title" />
+                    <label asp-for="BookName" class="form-label">@Localizer["Book_Label_Title"]</label>
+                    <input asp-for="BookName" class="form-control" placeholder="@Localizer["Book_Placeholder_Title"]" />
                     <span asp-validation-for="BookName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="AuthorID" class="form-label">Author</label>
+                    <label asp-for="AuthorID" class="form-label">@Localizer["Book_Label_Author"]</label>
                     <select asp-for="AuthorID" class="form-select" asp-items="@(new SelectList(ViewBag.Authors, "AuthorID", "AuthorName"))">
-                        <option value="">-- Select Author --</option>
+                        <option value="">@Localizer["Book_Select_DefaultAuthor"]</option>
                     </select>
                     <span asp-validation-for="AuthorID" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="CopiesAvailable" class="form-label">Copies Available</label>
+                    <label asp-for="CopiesAvailable" class="form-label">@Localizer["Book_Label_CopiesAvailable"]</label>
                     <input asp-for="CopiesAvailable" class="form-control" type="number" min="0" />
                     <span asp-validation-for="CopiesAvailable" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="CopiesTotal" class="form-label">Copies Total</label>
+                    <label asp-for="CopiesTotal" class="form-label">@Localizer["Book_Label_CopiesTotal"]</label>
                     <input asp-for="CopiesTotal" class="form-control" type="number" min="1" />
                     <span asp-validation-for="CopiesTotal" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Year" class="form-label">Year of Publication</label>
-                    <input asp-for="Year" class="form-control" type="number" placeholder="e.g. 2023" />
+                    <label asp-for="Year" class="form-label">@Localizer["Book_Label_Year"]</label>
+                    <input asp-for="Year" class="form-control" type="number" placeholder="@Localizer["Book_Placeholder_Year"]" />
                     <span asp-validation-for="Year" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Publisher" class="form-label">Publisher</label>
-                    <input asp-for="Publisher" class="form-control" placeholder="Publisher name" />
+                    <label asp-for="Publisher" class="form-label">@Localizer["Book_Label_Publisher"]</label>
+                    <input asp-for="Publisher" class="form-control" placeholder="@Localizer["Book_Placeholder_Publisher"]" />
                     <span asp-validation-for="Publisher" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="BookDescription" class="form-label">Description</label>
+                    <label asp-for="BookDescription" class="form-label">@Localizer["Book_Label_Description"]</label>
                     <textarea asp-for="BookDescription" class="form-control" rows="3"></textarea>
                     <span asp-validation-for="BookDescription" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="CategoryID" class="form-label">Category ID</label>
+                    <label asp-for="CategoryID" class="form-label">@Localizer["Book_Label_CategoryID"]</label>
                     <input asp-for="CategoryID" class="form-control" type="number" />
                     <span asp-validation-for="CategoryID" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="ImageFile" class="form-label">Book Cover Image</label>
+                    <label asp-for="ImageFile" class="form-label">@Localizer["Book_Label_Image"]</label>
                     <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-success">@Localizer["Global_Btn_Add"]</button>
+                    <a asp-action="Index" class="btn btn-secondary">@Localizer["Global_Btn_Back"]</a>
                 </div>
 
             </form>

@@ -1,7 +1,10 @@
 @model LibaryManagment.Models.BookModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Book Details";
+    ViewData["Title"] = Localizer["Book_Details_Title"];
 }
 
 <div class="container mt-4">
@@ -9,7 +12,7 @@
         <div class="col-md-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index">Books</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">@Localizer["Book_Index_TabTitle"]</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@Model.BookName</li>
                 </ol>
             </nav>
@@ -17,7 +20,6 @@
     </div>
 
     <div class="row">
-        <!-- Book Image -->
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
@@ -34,38 +36,35 @@
                 </div>
             </div>
 
-            <!-- Availability Status -->
             <div class="card mt-3">
                 <div class="card-body">
-                    <h5 class="card-title">Availability</h5>
+                    <h5 class="card-title">@Localizer["Book_Filter_Label_Availability"]</h5>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span>Available Copies:</span>
+                        <span>@Localizer["Book_Details_Label_AvailableCopies"]:</span>
                         <strong class="@(Model.CopiesAvailable > 0 ? "text-success" : "text-danger")">
                             @Model.CopiesAvailable / @Model.CopiesTotal
                         </strong>
                     </div>
                     @if (Model.CopiesAvailable > 0)
                     {
-                        <span class="badge bg-success mt-2">Available</span>
+                        <span class="badge bg-success mt-2">@Localizer["Book_Filter_Option_Available"]</span>
                     }
                     else
                     {
-                        <span class="badge bg-danger mt-2">Not Available</span>
+                        <span class="badge bg-danger mt-2">@Localizer["Book_Status_NotAvailable"]</span>
                     }
                 </div>
             </div>
         </div>
 
-        <!-- Book Information -->
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     <h2 class="mb-0">@Model.BookName</h2>
                 </div>
                 <div class="card-body">
-                    <!-- Author Information -->
                     <div class="mb-3">
-                        <h5>Author</h5>
+                        <h5>@Localizer["Book_Label_Author"]</h5>
                         <p>
                             <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.AuthorID" 
                                class="btn btn-outline-primary btn-sm">
@@ -76,53 +75,50 @@
 
                     <hr />
 
-                    <!-- Book Details -->
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <h6><i class="fas fa-calendar"></i> Publication Year</h6>
+                            <h6><i class="fas fa-calendar"></i> @Localizer["Book_Label_Year"]</h6>
                             <p>@Model.Year</p>
                         </div>
                         <div class="col-md-6">
-                            <h6><i class="fas fa-building"></i> Publisher</h6>
+                            <h6><i class="fas fa-building"></i> @Localizer["Book_Label_Publisher"]</h6>
                             <p>@Model.Publisher</p>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <h6><i class="fas fa-tag"></i> Category</h6>
+                            <h6><i class="fas fa-tag"></i> @Localizer["Book_Filter_Label_Category"]</h6>
                             <p>
                                 <span class="badge bg-secondary">@Model.CategoryName</span>
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <h6><i class="fas fa-hashtag"></i> Book ID</h6>
+                            <h6><i class="fas fa-hashtag"></i> @Localizer["Book_Card_Label_ID"]</h6>
                             <p>@Model.BookId</p>
                         </div>
                     </div>
 
                     <hr />
 
-                    <!-- Description -->
                     <div class="mb-3">
-                        <h5><i class="fas fa-align-left"></i> Description</h5>
+                        <h5><i class="fas fa-align-left"></i> @Localizer["Book_Label_Description"]</h5>
                         <p class="text-justify">@Model.BookDescription</p>
                     </div>
 
-                    <!-- Action Buttons -->
                     <div class="mt-4">
                         <a asp-action="Index" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Back to List
+                            <i class="fas fa-arrow-left"></i> @Localizer["Global_Btn_Back"]
                         </a>
                         
                         @if (User.IsInRole("admin") || User.IsInRole("lib"))
                         {
                             <a asp-action="Edit" asp-route-id="@Model.BookId" class="btn btn-warning">
-                                <i class="fas fa-edit"></i> Edit
+                                <i class="fas fa-edit"></i> @Localizer["Global_Btn_Edit"]
                             </a>
                             <a asp-action="Delete" asp-route-id="@Model.BookId" class="btn btn-danger"
-                               onclick="return confirm('Are you sure you want to delete this book?')">
-                                <i class="fas fa-trash"></i> Delete
+                               onclick="return confirm('@Localizer["Book_Confirm_Delete"]')">
+                                <i class="fas fa-trash"></i> @Localizer["Global_Btn_Delete"]
                             </a>
                         }
                     </div>
@@ -130,27 +126,24 @@
             </div>
         </div>
         
-        <!-- REVIEWS SECTION -->
-        
         @if (User.IsInRole("admin") || User.IsInRole("lib") || User.IsInRole("Student"))
         {
             <div class="row mt-5">
             <div class="col-md-12">
-                <h3>📢 User Reviews</h3>
+                <h3>📢 @Localizer["Review_Header_Title"]</h3>
                 <hr />
                 
-                <!-- 1. Add Review Form (Only if Logged In) -->
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="card mb-4 bg-light">
                         <div class="card-body">
-                            <h5 class="card-title">Leave a Review</h5>
+                            <h5 class="card-title">@Localizer["Review_Form_Title"]</h5>
                             <form asp-action="AddReview" method="post">
                                 <input type="hidden" name="BookId" value="@Model.BookId" />
                                 
                                 <div class="row">
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Rating</label>
+                                        <label class="form-label">@Localizer["Review_Label_Rating"]</label>
                                         <select name="Rating" class="form-select">
                                             <option value="5">⭐⭐⭐⭐⭐ (5)</option>
                                             <option value="4">⭐⭐⭐⭐ (4)</option>
@@ -160,11 +153,11 @@
                                         </select>
                                     </div>
                                     <div class="col-md-8 mb-3">
-                                        <label class="form-label">Your Comment</label>
-                                        <input name="Content" class="form-control" required placeholder="Write your thoughts here..." />
+                                        <label class="form-label">@Localizer["Review_Label_Comment"]</label>
+                                        <input name="Content" class="form-control" required placeholder="@Localizer["Review_Placeholder_Comment"]" />
                                     </div>
                                     <div class="col-md-2 mb-3 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary w-100">Post</button>
+                                        <button type="submit" class="btn btn-primary w-100">@Localizer["Review_Btn_Post"]</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,11 +167,10 @@
                 else
                 {
                     <div class="alert alert-info">
-                        Please <a href="/Login/Login">login</a> to leave a review.
+                        @Localizer["Review_Text_Please"] <a href="/Login/Login">@Localizer["Review_Link_Login"]</a> @Localizer["Review_Text_ToLeaveReview"]
                     </div>
                 }
 
-                <!-- 2. List of Reviews -->
                 @if (ViewBag.Reviews != null)
                 {
                     var reviews = ViewBag.Reviews as List<LibaryManagment.Models.ReviewModel>;
@@ -197,14 +189,14 @@
                                         </span>
                                     </div>
                                     <p class="card-text mt-2">@review.Content</p>
-                                    <small class="text-muted">Posted on @review.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small>
+                                    <small class="text-muted">@Localizer["Review_Text_PostedOn", review.CreatedAt.ToString("yyyy-MM-dd HH:mm")]</small>
                                 </div>
                             </div>
                         }
                     }
                     else
                     {
-                        <p class="text-muted">No reviews yet. Be the first to review!</p>
+                        <p class="text-muted">@Localizer["Review_Text_Empty"]</p>
                     }
                 }
             </div>

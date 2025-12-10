@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MySqlConnector;
 using LibaryManagment.Models;
-using Microsoft.AspNetCore.Authorization; // Required for [AllowAnonymous]
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization; // Required for [AllowAnonymous]
 
 namespace LibaryManagment.Controllers;
 

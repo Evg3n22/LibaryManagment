@@ -1,85 +1,131 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Libary Managment</title>
+    <title>@ViewData["Title"] - Library Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LibaryManagment.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Libary Managment System</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3 py-3">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand fw-bold text-primary" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-book-reader me-2"></i>LMS
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-row flex-grow-1 justify-content-end">
+                
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+                    
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Home/Index">Home</a>
+                            <a class="nav-link text-dark" href="/Home/Index">
+                                <i class="fas fa-home me-1"></i> @Localizer["HeaderHome"]
+                            </a>
                         </li>
                         
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Book/Index">
+                                <i class="fas fa-book me-1"></i> @Localizer["HeaderBook"]
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Author/Index">
+                                <i class="fas fa-pen-nib me-1"></i> @Localizer["HeaderAuthor"]
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole("admin") || User.IsInRole("lib") || User.IsInRole("Student"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/Borrowing/Index">
+                                    <i class="fas fa-hand-holding-book me-1"></i> @Localizer["HeaderBorrowing"]
+                                </a>
+                            </li>
+                        }
+
                         @if (User.IsInRole("admin") || User.IsInRole("lib"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Student/Index">Student</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cog me-1"></i> Адміністрування
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" href="/Student/Index">@Localizer["HeaderStudent"]</a></li>
+                                    <li><a class="dropdown-item" href="/Librarian/Index">@Localizer["HeaderLibrarians"]</a></li>
+                                </ul>
                             </li>
                         }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
                         
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Author/Index">Author</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-globe me-1"></i> 
+                                @(System.Globalization.CultureInfo.CurrentUICulture.Name == "uk" ? "UA" : "EN")
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li>
+                                    <a class="dropdown-item @(System.Globalization.CultureInfo.CurrentUICulture.Name == "en" ? "active" : "")" 
+                                       href="/Home/SetLanguage?culture=en&returnUrl=@Context.Request.Path">
+                                       🇺🇸 English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item @(System.Globalization.CultureInfo.CurrentUICulture.Name == "uk" ? "active" : "")" 
+                                       href="/Home/SetLanguage?culture=uk&returnUrl=@Context.Request.Path">
+                                       🇺🇦 Українська
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Book/Index">Book</a>
-                        </li>
-                        @if (User.IsInRole("admin") || User.IsInRole("lib") || User.IsInRole(("Student")))
+
+                        <li class="nav-item border-start mx-2 d-none d-lg-block"></li> @if (!User.Identity.IsAuthenticated) 
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Borrowing/Index">Borrowing</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("admin") || User.IsInRole("lib"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Librarian/Index">Librarian</a>
-                            </li>
-                        }
-                        @if (!User.Identity.IsAuthenticated) 
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                                <a class="nav-link text-primary fw-bold" asp-controller="Login" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i> @Localizer["HeaderLogin"]
+                                </a>
                             </li>
                         } 
                         else 
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout (@User.Identity.Name)</a>
+                                <a class="nav-link text-danger" asp-controller="Login" asp-action="Logout">
+                                    <i class="fas fa-sign-out-alt me-1"></i> @Localizer["HeaderLogout"] <small>(@User.Identity.Name)</small>
+                                </a>
                             </li>
                         }
-                        
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container d-flex justify-content-center">
-            &copy; 2025 - LibaryManagment - made by Evgen Gulevaty and Vladyslav Yampol
+    <footer class="border-top footer text-muted mt-5 py-3 bg-light">
+        <div class="container text-center">
+            @Localizer["Footer"]
         </div>
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

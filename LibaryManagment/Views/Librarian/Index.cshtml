@@ -1,27 +1,30 @@
 @model List<LibaryManagment.Models.LibrarianModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Librarians";
-}
-@if (User.IsInRole("admin"))
-{
-    <a class="btn btn-primary mt-3 ms-2" href="/Librarian/Create">Add New Librarian</a>
+    ViewData["Title"] = Localizer["Librarian_Index_Title"];
 }
 
+@if (User.IsInRole("admin"))
+{
+    <a class="btn btn-primary mt-3 ms-2" href="/Librarian/Create">@Localizer["Librarian_Index_Btn_Add"]</a>
+}
 
 <table class="table table-bordered mt-3">
     <thead>
     <tr>
         @if (User.IsInRole("admin"))
         {
-            <th>LibrarianID</th>
+            <th>@Localizer["Librarian_Table_Header_Id"]</th>
         }
-        <th>Name</th>
-        <th>Age</th>
-        <th>Phone</th>
+        <th>@Localizer["Librarian_Table_Header_Name"]</th>
+        <th>@Localizer["Librarian_Table_Header_Age"]</th>
+        <th>@Localizer["Librarian_Table_Header_Phone"]</th>
         @if (User.IsInRole("admin"))
         {
-            <th>Actions</th>
+            <th>@Localizer["Librarian_Table_Header_Actions"]</th>
         }
     </tr>
     </thead>
@@ -31,7 +34,7 @@
         <tr>
             @if (User.IsInRole("admin"))
             {
-                <td>@item.LibrarianId</td> <!-- Add this line -->
+                <td>@item.LibrarianId</td>
             }
             <td>@item.Name</td>
             <td>@item.Age</td>
@@ -39,11 +42,10 @@
             @if (User.IsInRole("admin"))
             {
                 <td>
-                    <a class="btn btn-warning btn-sm" href="/Librarian/Edit/@item.LibrarianId">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Librarian/Delete/@item.LibrarianId" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-warning btn-sm" href="/Librarian/Edit/@item.LibrarianId">@Localizer["Global_Btn_Edit"]</a>
+                    <a class="btn btn-danger btn-sm" href="/Librarian/Delete/@item.LibrarianId" onclick="return confirm('@Localizer["Global_Confirm_Delete"]')">@Localizer["Global_Btn_Delete"]</a>
                 </td>
             }
-
         </tr>
     }
     </tbody>

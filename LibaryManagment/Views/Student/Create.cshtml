@@ -1,11 +1,14 @@
 @model LibaryManagment.Models.StudentModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using LibaryManagment
+@inject IHtmlLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Add Student";
+    ViewData["Title"] = Localizer["Student_Create_Title"];
 }
 
 <div class="container mt-4">
-    <h2>Add Student</h2>
+    <h2>@Localizer["Student_Create_Title"]</h2>
     <hr />
     <div class="row">
         <div class="col-md-6">
@@ -14,31 +17,31 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 <div class="mb-3">
-                    <label asp-for="StudentName" class="form-label">Student Name</label>
+                    <label asp-for="StudentName" class="form-label">@Localizer["Student_Label_Name"]</label>
                     <input asp-for="StudentName" class="form-control" />
                     <span asp-validation-for="StudentName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Email" class="form-label">Email</label>
+                    <label asp-for="Email" class="form-label">@Localizer["Student_Label_Email"]</label>
                     <input asp-for="Email" class="form-control" type="email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Phone" class="form-label">Phone</label>
+                    <label asp-for="Phone" class="form-label">@Localizer["Student_Label_Phone"]</label>
                     <input asp-for="Phone" class="form-control" type="tel" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Password" class="form-label">Password</label>
+                    <label asp-for="Password" class="form-label">@Localizer["Student_Label_Password"]</label>
                     <input asp-for="Password" class="form-control" type="password" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn btn-success">Add</button>
-                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-success">@Localizer["Global_Btn_Add"]</button>
+                <a asp-action="Index" class="btn btn-secondary">@Localizer["Global_Btn_Cancel"]</a>
             </form>
         </div>
     </div>

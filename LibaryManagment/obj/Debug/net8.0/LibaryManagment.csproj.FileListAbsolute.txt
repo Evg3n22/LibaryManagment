@@ -207,3 +207,9 @@
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Microsoft.Extensions.Localization.dll
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Microsoft.Extensions.Localization.Abstractions.dll
 /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/Microsoft.Extensions.ObjectPool.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.csproj.GenerateResource.cache
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/bin/Debug/net8.0/uk/LibaryManagment.resources.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/uk/LibaryManagment.resources.cs
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/uk/LibaryManagment.resources.dll
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.SharedResource.resources
+/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/obj/Debug/net8.0/LibaryManagment.SharedResource.uk.resources

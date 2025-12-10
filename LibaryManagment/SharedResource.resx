@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome to Our Library</value>
+  </data>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value>Learn. Grow. Achieve.</value>
+  </data>
+  <data name="LibrarySystem" xml:space="preserve">
+    <value>Library Management System</value>
+  </data>
+  <data name="LibrarySystemDesc" xml:space="preserve">
+    <value>Efficiently manage all aspects of your library operations</value>
+  </data>
+  <data name="HomeBookCardTitle" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="HomeAuthorsCardTitle" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="HomeStudentCardTitle" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="HomeBorrowingCardTitle" xml:space="preserve">
+    <value>Borrowing</value>
+  </data>
+  <data name="HomeLibrariansCardTitle" xml:space="preserve">
+    <value>Librarians</value>
+  </data>
+  <data name="HomeBookCardDesc" xml:space="preserve">
+    <value>Catalog and track your entire book collection with ease</value>
+  </data>
+  <data name="HomeAuthorsCardDesc" xml:space="preserve">
+    <value>Curate author profiles, biographies, and link them to their works</value>
+  </data>
+  <data name="HomeStudentCardDesc" xml:space="preserve">
+    <value>Manage student records, enrollments, and maintain accurate information</value>
+  </data>
+  <data name="HomeBorrowingCardDesc" xml:space="preserve">
+    <value>Track book loans, returns, and manage borrowing schedules</value>
+  </data>
+  <data name="HomeLibrariansCardDesc" xml:space="preserve">
+    <value>Oversee staff management and coordinate library operations</value>
+  </data>
+  <data name="HomeBookCardBtn" xml:space="preserve">
+    <value>Manage Books</value>
+  </data>
+  <data name="HomeAuthorsCardBtn" xml:space="preserve">
+    <value>Manage Authors</value>
+  </data>
+  <data name="HomeBorrowingCardBtn" xml:space="preserve">
+    <value>Manage Borrowing</value>
+  </data>
+  <data name="HomeLibrariansCardBtn" xml:space="preserve">
+    <value>Manage Librarians</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>© 2025 - LibaryManagment - made by Evgen Gulevaty and Vladyslav Yampol</value>
+  </data>
+  <data name="HeaderHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HeaderStudent" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="HeaderAuthor" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="HomeStudentCardBtn" xml:space="preserve">
+    <value>Manage Students</value>
+  </data>
+  <data name="HeaderLibrarians" xml:space="preserve">
+    <value>Librarians</value>
+  </data>
+  <data name="HeaderLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="HeaderLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="HeaderBook" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="HeaderBorrowing" xml:space="preserve">
+    <value>Borrowing</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  
+  <data name="Login_Button_Submit" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_Footer" xml:space="preserve">
+    <value>© 2025 Library Management System</value>
+  </data>
+  <data name="Login_JS_LoggingIn" xml:space="preserve">
+    <value>Logging in...</value>
+  </data>
+  <data name="Login_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_Label_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Login_PageTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_Placeholder_Password" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="Login_Placeholder_Username" xml:space="preserve">
+    <value>Enter your username</value>
+  </data>
+  <data name="Login_Subtitle" xml:space="preserve">
+    <value>Log in to the Library Management System</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  
+  <data name="Global_Btn_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Global_Btn_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Global_Confirm_Delete" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="Student_Index_Btn_Add" xml:space="preserve">
+    <value>Add New Student</value>
+  </data>
+  <data name="Student_Index_Title" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="Student_Table_Header_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Student_Table_Header_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Student_Table_Header_Id" xml:space="preserve">
+    <value>Student ID</value>
+  </data>
+  <data name="Student_Table_Header_Name" xml:space="preserve">
+    <value>Student Name</value>
+  </data>
+  <data name="Student_Table_Header_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  
+  <data name="Global_Btn_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Global_Btn_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Student_Create_Title" xml:space="preserve">
+    <value>Add Student</value>
+  </data>
+  <data name="Student_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Student_Label_Name" xml:space="preserve">
+    <value>Student Name</value>
+  </data>
+  <data name="Student_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Student_Label_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  
+  <data name="Global_Btn_Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Student_Edit_Title" xml:space="preserve">
+    <value>Edit Student</value>
+  </data>
+  
+  <data name="Author_Confirm_Delete" xml:space="preserve">
+    <value>Are you sure you want to delete this author?</value>
+  </data>
+  <data name="Author_Image_Placeholder" xml:space="preserve">
+    <value>No Image</value>
+  </data>
+  <data name="Author_Index_Btn_Add" xml:space="preserve">
+    <value>Add New Author</value>
+  </data>
+  <data name="Author_Index_Title" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="Author_Table_Header_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Author_Table_Header_BirthYear" xml:space="preserve">
+    <value>Birth Year</value>
+  </data>
+  <data name="Author_Table_Header_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Author_Table_Header_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Author_Table_Header_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Author_Table_Header_Name" xml:space="preserve">
+    <value>Author Name</value>
+  </data>
+  <data name="Global_Btn_ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  
+  <data name="Author_Create_Title" xml:space="preserve">
+    <value>Add Author</value>
+  </data>
+  <data name="Author_Label_BirthYear" xml:space="preserve">
+    <value>Birth Year</value>
+  </data>
+  <data name="Author_Label_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Author_Label_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Author_Label_Image" xml:space="preserve">
+    <value>Author Image</value>
+  </data>
+  <data name="Author_Label_Name" xml:space="preserve">
+    <value>Author Name</value>
+  </data>
+  
+  <data name="Author_Edit_Title" xml:space="preserve">
+    <value>Edit Author</value>
+  </data>
+  <data name="Author_Label_ChangeImage" xml:space="preserve">
+    <value>Change Image (optional)</value>
+  </data>
+  <data name="Author_Label_CurrentImage" xml:space="preserve">
+    <value>Current Image</value>
+  </data>
+  <data name="Author_Text_NoImage" xml:space="preserve">
+    <value>No image uploaded</value>
+  </data>
+  <data name="Global_Help_KeepImage" xml:space="preserve">
+    <value>Leave empty to keep the current image</value>
+  </data>
+  
+  <data name="Author_Details_Header_About" xml:space="preserve">
+    <value>About {0}</value>
+  </data>
+  <data name="Author_Details_Header_BooksBy" xml:space="preserve">
+    <value>Books by {0}</value>
+  </data>
+  <data name="Author_Details_Label_Biography" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="Author_Details_Label_BooksCount" xml:space="preserve">
+    <value>Books in Library</value>
+  </data>
+  <data name="Author_Details_Label_QuickInfo" xml:space="preserve">
+    <value>Quick Info</value>
+  </data>
+  <data name="Author_Details_NoBooks" xml:space="preserve">
+    <value>No books by this author in the library yet.</value>
+  </data>
+  <data name="Author_Details_Title" xml:space="preserve">
+    <value>Author Details</value>
+  </data>
+  <data name="Book_Status_Available" xml:space="preserve">
+    <value>Available ({0})</value>
+  </data>
+  <data name="Book_Status_NotAvailable" xml:space="preserve">
+    <value>Not Available</value>
+  </data>
+  <data name="Book_Table_Header_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Book_Table_Header_Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="Book_Table_Header_Publisher" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="Book_Table_Header_Title" xml:space="preserve">
+    <value>Book Title</value>
+  </data>
+  <data name="Book_Table_Header_Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Global_Btn_Back" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="Global_Btn_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  
+  <data name="Book_Card_ByAuthor" xml:space="preserve">
+    <value>by {0}</value>
+  </data>
+  <data name="Book_Card_Label_ID" xml:space="preserve">
+    <value>Book ID</value>
+  </data>
+  <data name="Book_Confirm_Delete" xml:space="preserve">
+    <value>Are you sure you want to delete this book?</value>
+  </data>
+  <data name="Book_Empty_Text" xml:space="preserve">
+    <value>Try adjusting your filters or search terms</value>
+  </data>
+  <data name="Book_Empty_Title" xml:space="preserve">
+    <value>No books found matching your search criteria</value>
+  </data>
+  <data name="Book_Filter_Btn_Apply" xml:space="preserve">
+    <value>Apply Filters</value>
+  </data>
+  <data name="Book_Filter_Btn_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Book_Filter_Label_Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="Book_Filter_Label_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Book_Filter_Label_Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Book_Filter_Option_AllBooks" xml:space="preserve">
+    <value>All Books</value>
+  </data>
+  <data name="Book_Filter_Option_AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="Book_Filter_Option_AllYears" xml:space="preserve">
+    <value>All Years</value>
+  </data>
+  <data name="Book_Filter_Option_Available" xml:space="preserve">
+    <value>Available Only</value>
+  </data>
+  <data name="Book_Filter_Option_Unavailable" xml:space="preserve">
+    <value>Unavailable Only</value>
+  </data>
+  <data name="Book_Index_Btn_Add" xml:space="preserve">
+    <value>Add New Book</value>
+  </data>
+  <data name="Book_Index_ResultsCount" xml:space="preserve">
+    <value>Showing {0} books</value>
+  </data>
+  <data name="Book_Index_TabTitle" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="Book_Index_Title" xml:space="preserve">
+    <value>Library Books</value>
+  </data>
+  <data name="Book_Search_Placeholder" xml:space="preserve">
+    <value>Search book title (use author: or publisher: for specific search)...</value>
+  </data>
+  <data name="Book_Search_Tooltip" xml:space="preserve">
+    <value>Examples: 'Harry Potter', 'author:Tolkien', 'publisher:Penguin'</value>
+  </data>
+  <data name="Book_Status_AvailableCount" xml:space="preserve">
+    <value>{0} / {1} Available</value>
+  </data>
+  <data name="Global_Btn_Moderate" xml:space="preserve">
+    <value>Moderate Reviews</value>
+  </data>
+  
+  <data name="Book_Create_Header" xml:space="preserve">
+    <value>Create New Book</value>
+  </data>
+  <data name="Book_Create_Title" xml:space="preserve">
+    <value>Create Book</value>
+  </data>
+  <data name="Book_Label_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Book_Label_CategoryID" xml:space="preserve">
+    <value>Category ID</value>
+  </data>
+  <data name="Book_Label_CopiesAvailable" xml:space="preserve">
+    <value>Copies Available</value>
+  </data>
+  <data name="Book_Label_CopiesTotal" xml:space="preserve">
+    <value>Copies Total</value>
+  </data>
+  <data name="Book_Label_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Book_Label_Image" xml:space="preserve">
+    <value>Book Cover Image</value>
+  </data>
+  <data name="Book_Label_Publisher" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="Book_Label_Title" xml:space="preserve">
+    <value>Book Name</value>
+  </data>
+  <data name="Book_Label_Year" xml:space="preserve">
+    <value>Year of Publication</value>
+  </data>
+  <data name="Book_Placeholder_Publisher" xml:space="preserve">
+    <value>Publisher name</value>
+  </data>
+  <data name="Book_Placeholder_Title" xml:space="preserve">
+    <value>Enter book title</value>
+  </data>
+  <data name="Book_Placeholder_Year" xml:space="preserve">
+    <value>e.g. 2023</value>
+  </data>
+  <data name="Book_Select_DefaultAuthor" xml:space="preserve">
+    <value>-- Select Author --</value>
+  </data>
+  
+  <data name="Book_Edit_Title" xml:space="preserve">
+    <value>Edit Book</value>
+  </data>
+  
+  <data name="Book_Details_Label_AvailableCopies" xml:space="preserve">
+    <value>Available Copies</value>
+  </data>
+  <data name="Book_Details_Title" xml:space="preserve">
+    <value>Book Details</value>
+  </data>
+  <data name="Review_Btn_Post" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Review_Form_Title" xml:space="preserve">
+    <value>Leave a Review</value>
+  </data>
+  <data name="Review_Header_Title" xml:space="preserve">
+    <value>User Reviews</value>
+  </data>
+  <data name="Review_Label_Comment" xml:space="preserve">
+    <value>Your Comment</value>
+  </data>
+  <data name="Review_Label_Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Review_Link_Login" xml:space="preserve">
+    <value>login</value>
+  </data>
+  <data name="Review_Placeholder_Comment" xml:space="preserve">
+    <value>Write your thoughts here...</value>
+  </data>
+  <data name="Review_Text_Empty" xml:space="preserve">
+    <value>No reviews yet. Be the first to review!</value>
+  </data>
+  <data name="Review_Text_Please" xml:space="preserve">
+    <value>Please</value>
+  </data>
+  <data name="Review_Text_PostedOn" xml:space="preserve">
+    <value>Posted on {0}</value>
+  </data>
+  <data name="Review_Text_ToLeaveReview" xml:space="preserve">
+    <value>to leave a review.</value>
+  </data>
+  
+  <data name="Review_Confirm_Delete" xml:space="preserve">
+    <value>⚠️ Are you sure you want to DELETE this review permanently?</value>
+  </data>
+  <data name="Review_Mod_Alert_Body" xml:space="preserve">
+    <value>You are viewing reviews for &lt;strong&gt;{0}&lt;/strong&gt;. You have the authority to delete offensive or inappropriate content.</value>
+  </data>
+  <data name="Review_Mod_Alert_Label" xml:space="preserve">
+    <value>Moderator Mode:</value>
+  </data>
+  <data name="Review_Mod_Btn_Back" xml:space="preserve">
+    <value>Back to Books</value>
+  </data>
+  <data name="Review_Mod_Empty_Desc" xml:space="preserve">
+    <value>Good job! Nothing to moderate here.</value>
+  </data>
+  <data name="Review_Mod_Empty_Title" xml:space="preserve">
+    <value>No reviews found for this book.</value>
+  </data>
+  <data name="Review_Mod_Header" xml:space="preserve">
+    <value>Moderation Panel</value>
+  </data>
+  <data name="Review_Mod_Title" xml:space="preserve">
+    <value>Moderation Panel</value>
+  </data>
+  <data name="Review_Table_Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="Review_Table_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Review_Table_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  
+  <data name="Borrowing_Btn_Issue" xml:space="preserve">
+    <value>Issue a Book</value>
+  </data>
+  <data name="Borrowing_Btn_Queue" xml:space="preserve">
+    <value>View Queue</value>
+  </data>
+  <data name="Borrowing_Btn_Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Borrowing_Confirm_Delete" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="Borrowing_Empty" xml:space="preserve">
+    <value>No records found</value>
+  </data>
+  <data name="Borrowing_Index_Title" xml:space="preserve">
+    <value>Book Borrowings</value>
+  </data>
+  <data name="Borrowing_Queue_Since" xml:space="preserve">
+    <value>since</value>
+  </data>
+  <data name="Borrowing_Queue_UserMessage" xml:space="preserve">
+    <value>You are in queue for the following books:</value>
+  </data>
+  <data name="Borrowing_Status_Borrowed" xml:space="preserve">
+    <value>Borrowed</value>
+  </data>
+  <data name="Borrowing_Status_NotReturned" xml:space="preserve">
+    <value>Not Returned</value>
+  </data>
+  <data name="Borrowing_Status_Returned" xml:space="preserve">
+    <value>Returned</value>
+  </data>
+  <data name="Borrowing_Table_Header_Book" xml:space="preserve">
+    <value>Book</value>
+  </data>
+  <data name="Borrowing_Table_Header_BorrowDate" xml:space="preserve">
+    <value>Borrow Date</value>
+  </data>
+  <data name="Borrowing_Table_Header_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Borrowing_Table_Header_ReturnDate" xml:space="preserve">
+    <value>Return Date</value>
+  </data>
+  <data name="Borrowing_Table_Header_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Borrowing_Table_Header_Student" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  
+  <data name="Borrowing_Btn_IssueOrQueue" xml:space="preserve">
+    <value>Issue / Add to Queue</value>
+  </data>
+  <data name="Borrowing_Create_Header" xml:space="preserve">
+    <value>Issue Book to Student</value>
+  </data>
+  <data name="Borrowing_Create_Title" xml:space="preserve">
+    <value>Issue Book</value>
+  </data>
+  <data name="Borrowing_JS_Available" xml:space="preserve">
+    <value>The book can be issued now!</value>
+  </data>
+  <data name="Borrowing_JS_Keyword_Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Borrowing_JS_Keyword_Queue" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+  <data name="Borrowing_JS_Queue" xml:space="preserve">
+    <value>The student will be added to the waiting queue.</value>
+  </data>
+  <data name="Borrowing_Note_Body" xml:space="preserve">
+    <value>If a book is not available, the student will automatically be added to the waiting queue.</value>
+  </data>
+  <data name="Borrowing_Note_Label" xml:space="preserve">
+    <value>Note:</value>
+  </data>
+  <data name="Borrowing_Option_Available" xml:space="preserve">
+    <value>(✓ Available: {0} copies)</value>
+  </data>
+  <data name="Borrowing_Option_Queue" xml:space="preserve">
+    <value>(⏳ Not available - will be added to the queue)</value>
+  </data>
+  <data name="Borrowing_Select_DefaultBook" xml:space="preserve">
+    <value>-- Select a book --</value>
+  </data>
+  <data name="Borrowing_Select_DefaultStudent" xml:space="preserve">
+    <value>-- Select a student --</value>
+  </data>
+  
+  <data name="Borrowing_Edit_Title" xml:space="preserve">
+    <value>Edit Borrowing Record</value>
+  </data>
+  
+  <data name="Global_Btn_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Global_Time_Days" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="Global_Time_Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="Global_Time_Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Queue_Badge_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Queue_Confirm_Remove" xml:space="preserve">
+    <value>Are you sure you want to remove {0} from the queue for the book {1}?</value>
+  </data>
+  <data name="Queue_Empty_Text" xml:space="preserve">
+    <value>There are currently no students waiting for books.</value>
+  </data>
+  <data name="Queue_Empty_Title" xml:space="preserve">
+    <value>The queue is empty</value>
+  </data>
+  <data name="Queue_Header_Title" xml:space="preserve">
+    <value>Book Waiting Queue</value>
+  </data>
+  <data name="Queue_Help_Bullet1" xml:space="preserve">
+    <value>When a book is returned, it is automatically issued to the first student in the queue.</value>
+  </data>
+  <data name="Queue_Help_Bullet2" xml:space="preserve">
+    <value>Students with the "Next" tag will receive the book first.</value>
+  </data>
+  <data name="Queue_Help_Bullet3" xml:space="preserve">
+    <value>The yellow background indicates the student who will receive the book next.</value>
+  </data>
+  <data name="Queue_Help_Title" xml:space="preserve">
+    <value>How the queue works:</value>
+  </data>
+  <data name="Queue_Page_Title" xml:space="preserve">
+    <value>Book Queue</value>
+  </data>
+  <data name="Queue_Table_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Queue_Table_RequestDate" xml:space="preserve">
+    <value>Request Date</value>
+  </data>
+  <data name="Queue_Table_WaitingTime" xml:space="preserve">
+    <value>Waiting Time</value>
+  </data>
+  <data name="Queue_Text_Total" xml:space="preserve">
+    <value>Total in queue: {0} students</value>
+  </data>
+  
+  <data name="Librarian_Index_Btn_Add" xml:space="preserve">
+    <value>Add New Librarian</value>
+  </data>
+  <data name="Librarian_Index_Title" xml:space="preserve">
+    <value>Librarians</value>
+  </data>
+  <data name="Librarian_Table_Header_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Librarian_Table_Header_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Librarian_Table_Header_Id" xml:space="preserve">
+    <value>Librarian ID</value>
+  </data>
+  <data name="Librarian_Table_Header_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Librarian_Table_Header_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  
+  <data name="Librarian_Create_Title" xml:space="preserve">
+    <value>Add Librarian</value>
+  </data>
+  <data name="Librarian_Label_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Librarian_Label_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Librarian_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Librarian_Label_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  
+  <data name="Librarian_Edit_Title" xml:space="preserve">
+    <value>Edit Librarian</value>
+  </data>
+</root>

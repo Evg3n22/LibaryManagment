@@ -21,6 +21,11 @@
         },
         "runtime": {
           "LibaryManagment.dll": {}
+        },
+        "resources": {
+          "uk/LibaryManagment.resources.dll": {
+            "locale": "uk"
+          }
         }
       },
       "Azure.Core/1.38.0": {

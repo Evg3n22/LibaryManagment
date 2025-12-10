@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/evgen/RiderProjects/LibaryManagment/LibaryManagment
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/SharedResource.resx]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/evgen/RiderProjects/LibaryManagment/LibaryManagment/Views/Author/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aG9yL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
